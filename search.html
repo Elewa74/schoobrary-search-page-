@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
@@ -275,32 +275,32 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const RTYPES = [
-      { key: "books", label: "ÙƒØªØ¨", desc: "ÙƒØªØ¨ ÙˆÙ…Ø±Ø§Ø¬Ø¹ Ø±Ù‚Ù…ÙŠØ©", count: "+ 1240 ÙƒØªØ§Ø¨", img: "https://picsum.photos/seed/books/640/360" },
-      { key: "videos", label: "ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª", desc: "Ø´Ø±ÙˆØ­Ø§Øª Ù…Ø±Ø¦ÙŠØ© ØªØ¹Ù„ÙŠÙ…ÙŠØ©", count: "+ 3200 ÙÙŠØ¯ÙŠÙˆ", img: "https://picsum.photos/seed/videos/640/360" },
-      { key: "questions", label: "Ø£Ø³Ø¦Ù„Ø©", desc: "Ø£Ø³Ø¦Ù„Ø© ÙˆØªØ¯Ø±ÙŠØ¨Ø§Øª ØªÙØ§Ø¹Ù„ÙŠØ©", count: "+ 8500 Ø³Ø¤Ø§Ù„", img: "https://picsum.photos/seed/questions/640/360" },
-      { key: "cards", label: "Ø¨Ø·Ø§Ù‚Ø§Øª", desc: "Ù…Ù„Ø®ØµØ§Øª ÙˆØ¨Ø·Ø§Ù‚Ø§Øª Ù…Ø±Ø§Ø¬Ø¹Ø©", count: "+ 1700 Ø¨Ø·Ø§Ù‚Ø©", img: "https://picsum.photos/seed/cards/640/360" },
-      { key: "images", label: "ØµÙˆØ±", desc: "Ø¨Ù†Ùƒ Ø§Ù„ØµÙˆØ± Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©", count: "+ 4200 ØµÙˆØ±Ø©", img: "https://picsum.photos/seed/images/640/360" },
-      { key: "tests", label: "Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª", desc: "Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª ØªÙØ§Ø¹Ù„ÙŠØ© Ù…ØµØ­Ø­Ø©", count: "+ 620 Ø§Ø®ØªØ¨Ø§Ø±", img: "https://picsum.photos/seed/tests/640/360" },
-      { key: "articles", label: "Ù…Ù‚Ø§Ù„Ø§Øª", desc: "Ù…Ù‚Ø§Ù„Ø§Øª ÙˆØªÙ‚Ø§Ø±ÙŠØ± Ø¹Ù„Ù…ÙŠØ©", count: "+ 900 Ù…Ù‚Ø§Ù„", img: "https://picsum.photos/seed/articles/640/360" },
-      { key: "presentations", label: "Ø¹Ø±ÙˆØ¶", desc: "Ø¹Ø±ÙˆØ¶ Ø¬Ø§Ù‡Ø²Ø© Ù„Ù„ÙØµÙ„", count: "+ 440 Ø¹Ø±Ø¶", img: "https://picsum.photos/seed/presentations/640/360" },
+      { key: "books", label: "كتب", desc: "كتب ومراجع رقمية", count: "+ 1240 كتاب", img: "https://picsum.photos/seed/books/640/360" },
+      { key: "videos", label: "فيديوهات", desc: "شروحات مرئية تعليمية", count: "+ 3200 فيديو", img: "https://picsum.photos/seed/videos/640/360" },
+      { key: "questions", label: "أسئلة", desc: "أسئلة وتدريبات تفاعلية", count: "+ 8500 سؤال", img: "https://picsum.photos/seed/questions/640/360" },
+      { key: "cards", label: "بطاقات", desc: "ملخصات وبطاقات مراجعة", count: "+ 1700 بطاقة", img: "https://picsum.photos/seed/cards/640/360" },
+      { key: "images", label: "صور", desc: "بنك الصور التعليمية", count: "+ 4200 صورة", img: "https://picsum.photos/seed/images/640/360" },
+      { key: "tests", label: "اختبارات", desc: "اختبارات تفاعلية مصححة", count: "+ 620 اختبار", img: "https://picsum.photos/seed/tests/640/360" },
+      { key: "articles", label: "مقالات", desc: "مقالات وتقارير علمية", count: "+ 900 مقال", img: "https://picsum.photos/seed/articles/640/360" },
+      { key: "presentations", label: "عروض", desc: "عروض جاهزة للفصل", count: "+ 440 عرض", img: "https://picsum.photos/seed/presentations/640/360" },
     ];
 
-    const SUGGESTIONS = ["Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª","Ø§Ù„Ø¹Ù„ÙˆÙ…","Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©","Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©","Ø§Ù„Ø¯Ø±Ø§Ø³Ø§Øª Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©","Ø§Ù„ØµÙ Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·","ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª ØªØ¹Ù„ÙŠÙ…ÙŠØ©"];
+    const SUGGESTIONS = ["الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية","الدراسات الإسلامية","الصف الأول المتوسط","فيديوهات تعليمية"];
     const RESULTS = [
-      { t: "Ø´Ø±Ø­ Ø§Ù„Ù…Ø¹Ø§Ø¯Ù„Ø§Øª Ø§Ù„Ø®Ø·ÙŠØ©", s: "Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª", g: "Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·", c: "Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ© Â· Ø§Ù„ÙˆØ²Ø§Ø±Ø©", d: "linear-gradient(160deg,#0070B0 0%, #0A2740 100%)" },
-      { t: "Ø£Ø³Ø§Ø³ÙŠØ§Øª Ø§Ù„Ø¹Ù„ÙˆÙ…", s: "Ø§Ù„Ø¹Ù„ÙˆÙ…", g: "Ø§Ù„Ø³Ø§Ø¯Ø³", c: "Ø§Ù„Ø¥Ù…Ø§Ø±Ø§Øª Â· Ø§Ù„ÙˆØ²Ø§Ø±Ø©", d: "linear-gradient(160deg,#3FB0B0 0%, #1A6A6A 100%)" },
-      { t: "Ø§Ø®ØªØ¨Ø§Ø± Ù†Ù‡Ø§ÙŠØ© Ø§Ù„Ø¯Ø±Ø³", s: "Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª", g: "Ø§Ù„Ø«Ø§Ù†ÙŠ Ø§Ù„Ù…ØªÙˆØ³Ø·", c: "Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©", d: "linear-gradient(160deg,#80C030 0%, #4A7A14 100%)" },
-      { t: "Ù…Ù„Ø®Øµ Ø§Ù„Ø¯Ø±Ø³ Ø§Ù„Ø£ÙˆÙ„", s: "Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©", g: "Ø§Ù„Ø®Ø§Ù…Ø³", c: "Ø§Ù„ÙƒÙˆÙŠØª", d: "linear-gradient(160deg,#F2D096 0%, #C98A2B 100%)" },
+      { t: "شرح المعادلات الخطية", s: "الرياضيات", g: "الأول المتوسط", c: "السعودية · الوزارة", d: "linear-gradient(160deg,#0070B0 0%, #0A2740 100%)" },
+      { t: "أساسيات العلوم", s: "العلوم", g: "السادس", c: "الإمارات · الوزارة", d: "linear-gradient(160deg,#3FB0B0 0%, #1A6A6A 100%)" },
+      { t: "اختبار نهاية الدرس", s: "الرياضيات", g: "الثاني المتوسط", c: "السعودية", d: "linear-gradient(160deg,#80C030 0%, #4A7A14 100%)" },
+      { t: "ملخص الدرس الأول", s: "اللغة العربية", g: "الخامس", c: "الكويت", d: "linear-gradient(160deg,#F2D096 0%, #C98A2B 100%)" },
     ];
     const TYPE_ICONS = {
-      books: "ðŸ“˜",
-      videos: "ðŸŽ¥",
-      questions: "â“",
-      cards: "ðŸ·ï¸",
-      images: "ðŸ–¼ï¸",
-      tests: "ðŸ§ª",
-      articles: "ðŸ“„",
-      presentations: "ðŸ–¥ï¸",
+      books: "📘",
+      videos: "🎥",
+      questions: "❓",
+      cards: "🏷️",
+      images: "🖼️",
+      tests: "🧪",
+      articles: "📄",
+      presentations: "🖥️",
     };
 
     function App() {
@@ -323,7 +323,7 @@
         if (openDrawer === "topic") setTopicSelected(true);
         if (openDrawer === "curriculum") {
           setCurrSelected(true);
-          window.location.href = "https://elewa74.github.io/schoobrary-search-page-/schoobrary-offline.html";
+          window.location.href = "schoobrary-offline.html";
           return;
         }
         setShowResults(true);
@@ -339,7 +339,7 @@
                 <div className="avatar">ME</div>
                 <div>
                   <div style={{ fontWeight: 700, fontSize: 14 }}>Moamen Elewa</div>
-                  <div style={{ fontSize: 11, color: "var(--muted)" }}>Ø­Ø³Ø§Ø¨ÙŠ</div>
+                  <div style={{ fontSize: 11, color: "var(--muted)" }}>حسابي</div>
                 </div>
               </div>
             </div>
@@ -347,17 +347,17 @@
 
           <section className="hero">
             <div className="container">
-              <h1 className="display">Ø§Ø¨Ø­Ø« ÙÙŠ Ø³ÙƒÙˆØ¨Ø±Ø§Ø±ÙŠ</h1>
-              <p>Ø§ÙƒØªØ´Ù Ø§Ù„ÙƒØªØ¨ØŒ Ø§Ù„ÙÙŠØ¯ÙŠÙˆÙ‡Ø§ØªØŒ Ø§Ù„Ø£Ø³Ø¦Ù„Ø©ØŒ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø§ØªØŒ Ø§Ù„ØµÙˆØ±ØŒ Ø§Ù„Ù…Ù‚Ø§Ù„Ø§ØªØŒ ÙˆØ®Ø·Ø· Ø§Ù„Ø¯Ø±ÙˆØ³ Ù…Ù† Ù…ÙƒØ§Ù† ÙˆØ§Ø­Ø¯.</p>
+              <h1 className="display">ابحث في سكوبراري</h1>
+              <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
               <div className="search-shell">
                 <div className="search-bar">
-                  <button className="btn btn-primary" onClick={() => setShowResults(true)}>Ø¨Ø­Ø«</button>
-                  <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Ø§Ø¨Ø­Ø« Ø¹Ù† Ù…ÙˆØ¶ÙˆØ¹ØŒ Ù…Ø§Ø¯Ø©ØŒ Ø¯Ø±Ø³ØŒ Ø³Ø¤Ø§Ù„ØŒ ÙƒØªØ§Ø¨ Ø£Ùˆ Ù†ÙˆØ¹ Ù…ÙˆØ±Ø¯..." />
+                  <button className="btn btn-primary" onClick={() => setShowResults(true)}>بحث</button>
+                  <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
-                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ / Ø§Ù„Ù…Ø§Ø¯Ø©</button>
-                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>Ø§Ù„Ø¯ÙˆÙ„Ø© / Ø§Ù„Ù…Ù†Ù‡Ø¬</button>
-                  <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>Ù†ÙˆØ¹ Ø§Ù„Ù…ØµØ§Ø¯Ø±</button>
+                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع / المادة</button>
+                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>الدولة / المنهج</button>
+                  <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>نوع المصادر</button>
                 </div>
               </div>
             </div>
@@ -368,24 +368,24 @@
               <div className="card drawer-card">
                 <div className="drawer-head">
                   <div>
-                    <h3 className="display drawer-title">{openDrawer === "topic" ? "Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ø£Ùˆ Ø§Ù„Ù…Ø§Ø¯Ø©" : openDrawer === "curriculum" ? "Ø§Ù„Ø¯ÙˆÙ„Ø© / Ø§Ù„Ù…Ù†Ù‡Ø¬" : "Ù†ÙˆØ¹ Ø§Ù„Ù…ØµØ§Ø¯Ø±"}</h3>
+                    <h3 className="display drawer-title">{openDrawer === "topic" ? "الموضوع أو المادة" : openDrawer === "curriculum" ? "الدولة / المنهج" : "نوع المصادر"}</h3>
                     <p className="drawer-sub">
-                      {openDrawer === "topic" && "Ø­Ø¯Ø¯ Ø§Ù„Ù…Ø§Ø¯Ø© Ø£Ùˆ Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ù„Ù„ÙˆØµÙˆÙ„ Ø¥Ù„Ù‰ Ø§Ù„Ù…ÙˆØ§Ø±Ø¯ Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ© Ø§Ù„Ù…Ø±ØªØ¨Ø·Ø© Ø¨Ù‡."}
-                      {openDrawer === "curriculum" && "Ø§Ø®ØªØ± Ø§Ù„Ø¯ÙˆÙ„Ø© ÙˆØ§Ù„Ù…Ù†Ù‡Ø¬ ÙˆØ§Ù„ØµÙ Ù„Ù„ÙˆØµÙˆÙ„ Ø¥Ù„Ù‰ Ù…ÙˆØ§Ø±Ø¯ Ù…Ø±ØªØ¨Ø·Ø© Ø¨Ø§Ù„Ù…Ù‚Ø±Ø± Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠ."}
-                      {openDrawer === "type" && "Ø§Ø®ØªØ± Ù†ÙˆØ¹ Ø§Ù„Ù…ØµØ§Ø¯Ø± Ø§Ù„ØªÙŠ ØªØ±ÙŠØ¯ Ø¹Ø±Ø¶Ù‡Ø§ ÙÙŠ Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ø¨Ø­Ø«."}
+                      {openDrawer === "topic" && "حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به."}
+                      {openDrawer === "curriculum" && "اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}
+                      {openDrawer === "type" && "اختر نوع المصادر التي تريد عرضها في نتائج البحث."}
                     </p>
                   </div>
-                  <button className="btn btn-ghost" onClick={() => setOpenDrawer(null)}>Ø¥ØºÙ„Ø§Ù‚</button>
+                  <button className="btn btn-ghost" onClick={() => setOpenDrawer(null)}>إغلاق</button>
                 </div>
 
                 {openDrawer === "topic" && (
                   <div className="field-grid-4">
                     {[
-                      ["Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠ","Ø§Ù„Ø¬Ø¨Ø±",true],["Ø§Ù„Ù…Ø¬Ø§Ù„","",false],["Ø§Ù„Ù…Ø­ÙˆØ±","",false],["Ø§Ù„Ù…ÙˆØ¶ÙˆØ¹ Ø§Ù„ÙØ±Ø¹ÙŠ","",false]
+                      ["الموضوع الرئيسي","الجبر",true],["المجال","",false],["المحور","",false],["الموضوع الفرعي","",false]
                     ].map(([label,value,active]) => (
                       <div className="field" key={label}>
                         <div className="field-label">{label}</div>
-                        <div className={`select ${active ? "active":""}`}><span>{value || "Ø§Ø®ØªØ±..."}</span><span>â–¾</span></div>
+                        <div className={`select ${active ? "active":""}`}><span>{value || "اختر..."}</span><span>▾</span></div>
                       </div>
                     ))}
                   </div>
@@ -394,11 +394,11 @@
                 {openDrawer === "curriculum" && (
                   <div className="field-grid-4">
                     {[
-                      ["Ø§Ù„Ø¯ÙˆÙ„Ø©","Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©",true],["Ø§Ù„Ù…Ù†Ù‡Ø¬","ÙˆØ²Ø§Ø±Ø© Ø§Ù„ØªØ¹Ù„ÙŠÙ…",true],["Ø§Ù„ØµÙ Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠ","Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·",true],["Ø§Ù„Ù…Ø§Ø¯Ø©","Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª",true]
+                      ["الدولة","السعودية",true],["المنهج","وزارة التعليم",true],["الصف الدراسي","الأول المتوسط",true],["المادة","الرياضيات",true]
                     ].map(([label,value,active]) => (
                       <div className="field" key={label}>
                         <div className="field-label">{label}</div>
-                        <div className={`select ${active ? "active":""}`}><span>{value || "Ø§Ø®ØªØ±..."}</span><span>â–¾</span></div>
+                        <div className={`select ${active ? "active":""}`}><span>{value || "اختر..."}</span><span>▾</span></div>
                       </div>
                     ))}
                   </div>
@@ -408,7 +408,7 @@
                   <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(120px,1fr))",gap:"10px"}}>
                     {RTYPES.map(r => (
                       <button key={r.key} className="chip" style={{height:46,justifyContent:"center",borderColor:selectedTypes.has(r.key)?"var(--blue)":"var(--border)",background:selectedTypes.has(r.key)?"rgba(58,123,213,.1)":"#fff"}} onClick={() => toggleType(r.key)}>
-                        <span style={{fontSize:16,lineHeight:1}}>{TYPE_ICONS[r.key] || "â€¢"}</span>
+                        <span style={{fontSize:16,lineHeight:1}}>{TYPE_ICONS[r.key] || "•"}</span>
                         <span>{r.label}</span>
                       </button>
                     ))}
@@ -416,8 +416,8 @@
                 )}
 
                 <div style={{display:"flex",justifyContent:"flex-start",gap:12,marginTop:18,paddingTop:18,borderTop:"1px solid var(--mist)"}}>
-                  <button className="btn" style={{background:"var(--butter)",color:"#fff"}} onClick={applyDrawer}>Ø¨Ø­Ø«</button>
-                  <button className="btn btn-ghost">Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ†</button>
+                  <button className="btn" style={{background:"var(--butter)",color:"#fff"}} onClick={applyDrawer}>بحث</button>
+                  <button className="btn btn-ghost">إعادة تعيين</button>
                 </div>
               </div>
             </div>
@@ -426,24 +426,24 @@
           {showResults && hasFilters && (
             <section className="results">
               <div className="container">
-                <h2 className="display">{query ? `Â«${query}Â»` : "Ø£Ø­Ø¯Ø« Ø§Ù„Ù…ÙˆØ§Ø±Ø¯ Ø§Ù„Ù…Ø¶Ø§ÙØ©"}</h2>
+                <h2 className="display">{query ? `«${query}»` : "أحدث الموارد المضافة"}</h2>
                 <div className="meta-filters">
-                  <span className="chip">Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©</span>
-                  <span className="chip">Ø§Ù„ÙˆØ²Ø§Ø±Ø©</span>
-                  <span className="chip">Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·</span>
+                  <span className="chip">السعودية</span>
+                  <span className="chip">الوزارة</span>
+                  <span className="chip">الأول المتوسط</span>
                   {[...selectedTypes].map((k) => <span className="chip" key={k}>{RTYPES.find(x => x.key===k)?.label}</span>)}
                 </div>
                 <div className="popular">
-                  <div className="popular-title">Ø¹Ù…Ù„ÙŠØ§Øª Ø¨Ø­Ø« Ø´Ø§Ø¦Ø¹Ø©</div>
+                  <div className="popular-title">عمليات بحث شائعة</div>
                   <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>{SUGGESTIONS.map(s => <button key={s} className="chip" onClick={() => setQuery(s)}>{s}</button>)}</div>
                 </div>
                 <div className="result-grid">
                   {RESULTS.map((r,idx) => (
                     <article key={idx} className="card">
-                      <div className="result-top" style={{background:r.d}}>ðŸ“˜</div>
+                      <div className="result-top" style={{background:r.d}}>📘</div>
                       <div className="result-body">
                         <div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div>
-                        <div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} Â· {r.g} Â· {r.c}</div>
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div>
                       </div>
                     </article>
                   ))}
@@ -454,7 +454,7 @@
 
           <section className="browse">
             <div className="container">
-              <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>ØªØµÙØ­ Ø§Ù„Ù…ÙˆØ§Ø±Ø¯ Ø­Ø³Ø¨ Ø§Ù„Ù†ÙˆØ¹</h2>
+              <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>تصفح الموارد حسب النوع</h2>
               <div className="browse-grid">
                 {RTYPES.map((r) => (
                   <article key={r.key} className="card">
@@ -467,7 +467,7 @@
                       <div style={{fontSize:13,color:"var(--muted)",lineHeight:1.6}}>{r.desc}</div>
                       <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid var(--mist)",display:"flex",justifyContent:"space-between"}}>
                         <span style={{fontSize:12,color:"var(--muted)"}}>{r.count}</span>
-                        <span style={{fontSize:13,color:"var(--blue)",fontWeight:700}}>Ø§Ø³ØªØ¹Ø±Ø§Ø¶</span>
+                        <span style={{fontSize:13,color:"var(--blue)",fontWeight:700}}>استعراض</span>
                       </div>
                     </div>
                   </article>
@@ -483,4 +483,3 @@
   </script>
 </body>
 </html>
-
