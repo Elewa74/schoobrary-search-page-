@@ -352,8 +352,8 @@
                   <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
-                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع / المادة</button>
-                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>الدولة / المنهج</button>
+                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع</button>
+                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>المنهج</button>
                   <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>نوع المصادر</button>
                 </div>
               </div>
