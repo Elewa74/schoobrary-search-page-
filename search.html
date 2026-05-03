@@ -344,9 +344,9 @@
                   <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
-                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>+ الموضوع / المادة</button>
-                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>+ الدولة / المنهج</button>
-                  <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>+ نوع المورد</button>
+                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع / المادة</button>
+                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>الدولة / المنهج</button>
+                  <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>نوع المصادر</button>
                 </div>
               </div>
             </div>
@@ -357,11 +357,11 @@
               <div className="card drawer-card">
                 <div className="drawer-head">
                   <div>
-                    <h3 className="display drawer-title">{openDrawer === "topic" ? "الموضوع أو المادة" : openDrawer === "curriculum" ? "الدولة / المنهج" : "نوع المورد"}</h3>
+                    <h3 className="display drawer-title">{openDrawer === "topic" ? "الموضوع أو المادة" : openDrawer === "curriculum" ? "الدولة / المنهج" : "نوع المصادر"}</h3>
                     <p className="drawer-sub">
                       {openDrawer === "topic" && "حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به."}
                       {openDrawer === "curriculum" && "اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}
-                      {openDrawer === "type" && "اختر نوع المورد الذي تريد عرضه في نتائج البحث."}
+                      {openDrawer === "type" && "اختر نوع المصادر التي تريد عرضها في نتائج البحث."}
                     </p>
                   </div>
                   <button className="btn btn-ghost" onClick={() => setOpenDrawer(null)}>إغلاق</button>
@@ -406,7 +406,7 @@
 
                 <div style={{display:"flex",justifyContent:"space-between",marginTop:18,paddingTop:18,borderTop:"1px solid var(--mist)"}}>
                   <button className="btn btn-ghost">إعادة تعيين</button>
-                  <button className="btn" style={{background:"var(--butter)",color:"#fff"}} onClick={applyDrawer}>تطبيق المرشحات</button>
+                  <button className="btn" style={{background:"var(--butter)",color:"#fff"}} onClick={applyDrawer}>بحث</button>
                 </div>
               </div>
             </div>
