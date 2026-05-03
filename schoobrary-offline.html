@@ -80,6 +80,22 @@
     gap: 10px;
     direction: ltr;
   }
+  .back-link {
+    height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1px solid #d8e6f5;
+    background: #fff;
+    color: #1f4d8d;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { background: #f4f8ff; }
   .user-avatar {
     width: 40px;
     height: 40px;
@@ -758,6 +774,10 @@
     <span class="blue">schoo</span><span class="green">brary</span>
   </a>
   <div class="user-profile">
+    <button class="back-link" onclick="goBackToSearch()">
+      <span>←</span>
+      <span>العودة للبحث</span>
+    </button>
     <div class="user-avatar">ME</div>
     <div class="user-info">
       <div class="user-name">Moamen Elewa</div>
@@ -1326,6 +1346,14 @@
   function toggleAccordion(header) {
     const item = header.parentElement;
     item.classList.toggle('open');
+  }
+
+  function goBackToSearch() {
+    if (window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+    window.location.href = "search.html";
   }
 
   // Pagination
