@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schoobrary - المكتبة التعليمية</title>
+<!-- Offline: uses Cairo if installed locally, otherwise falls back to system Arabic fonts -->
+<style>
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Cairo'), local('Cairo-Regular');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Cairo Medium'), local('Cairo-Medium');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Cairo SemiBold'), local('Cairo-SemiBold');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Cairo Bold'), local('Cairo-Bold');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Cairo';
+    src: local('Cairo ExtraBold'), local('Cairo-ExtraBold');
+    font-weight: 800;
+    font-style: normal;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Cairo', 'Segoe UI', 'Tahoma', 'Arial', sans-serif;
+    background: #f5f7fa;
+    color: #333;
+    direction: rtl;
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: #fff;
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #2196F3;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #2196F3;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    direction: ltr;
+  }
+  .logo .logo-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .logo span.blue { color: #2196F3; }
+  .logo span.green { color: #4CAF50; }
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    direction: ltr;
+  }
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2196F3;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .user-info {
+    text-align: right;
+  }
+  .user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+  }
+  .user-label {
+    font-size: 11px;
+    color: #999;
+  }
+
+  /* ===== TABS ===== */
+  .tabs-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 10px;
+    background: #f5f7fa;
+  }
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+  }
+  .tab {
+    padding: 10px 36px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+    color: #666;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s;
+  }
+  .tab.active {
+    background: #2196F3;
+    color: #fff;
+    border-radius: 30px;
+  }
+
+  /* ===== TAB PAGES ===== */
+  .tab-page { display: none; }
+  .tab-page.active { display: flex; }
+  .lesson-plans-page.active { display: block; }
+
+  /* ===== MAIN LAYOUT ===== */
+  .main-layout {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 10px 20px 40px;
+    gap: 24px;
+  }
+  .content-area {
+    flex: 1;
+    min-width: 0;
+  }
+  .sidebar {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  /* ===== CONTENT TYPE HEADER ===== */
+  .content-type-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    direction: rtl;
+  }
+  .content-type-header svg {
+    color: #4CAF50;
+  }
+
+  /* ===== ICON CAROUSEL ===== */
+  .carousel-wrapper {
+    position: relative;
+    margin: 10px 0 20px;
+  }
+  .carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px 5px;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+  .carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+    padding: 16px 10px;
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+  }
+  .carousel-item:hover {
+    border-color: #2196F3;
+    box-shadow: 0 2px 12px rgba(33,150,243,0.1);
+  }
+  .carousel-item .icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-item .icon-box svg {
+    width: 32px;
+    height: 32px;
+  }
+  .carousel-item span {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+  }
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 2;
+    transition: all 0.2s;
+  }
+  .carousel-arrow:hover { background: #f5f5f5; }
+  .carousel-arrow.left { right: -10px; }
+  .carousel-arrow.right { left: -10px; }
+
+  /* ===== BREADCRUMB & RESULTS ===== */
+  .breadcrumb-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    margin-bottom: 8px;
+  }
+  .results-count {
+    font-size: 14px;
+    color: #888;
+    font-weight: 600;
+  }
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #2196F3;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .breadcrumb span {
+    color: #2196F3;
+    font-weight: 500;
+  }
+  .breadcrumb .sep {
+    color: #ccc;
+    margin: 0 2px;
+  }
+
+  /* ===== CONTENT CARDS ===== */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e8ecf0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  /* Card Thumbnail */
+  .card-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-thumbnail-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.12;
+  }
+  .card-thumbnail-bg svg {
+    width: 100%;
+    height: 100%;
+  }
+  .card-thumbnail-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .card-thumbnail-content .schoopedia-logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .card-thumbnail-content .schoopedia-logo svg {
+    width: 20px;
+    height: 20px;
+  }
+  .card-thumbnail-content .schoopedia-logo span {
+    font-size: 12px;
+    font-weight: 700;
+    color: #4CAF50;
+  }
+  .card-thumbnail-content .card-type-label {
+    font-size: 16px;
+    font-weight: 800;
+    color: #333;
+  }
+  .card-thumbnail-content .card-type-sublabel {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+  }
+  /* Type badge on thumbnail */
+  .card-type-badge {
+    position: absolute;
+    top: 10px;
+    left: auto;
+    right: 10px;
+    z-index: 3;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-type-badge svg { width: 18px; height: 18px; }
+
+  /* Card Body */
+  .card-body {
+    padding: 14px 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #333;
+    text-align: right;
+    line-height: 1.6;
+    min-height: 40px;
+  }
+  .card-meta {
+    font-size: 11px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    direction: rtl;
+  }
+  .card-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+  .card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 16px 14px;
+    border-top: 1px solid #f0f0f0;
+  }
+  .card-actions-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-details {
+    padding: 5px 18px;
+    border-radius: 6px;
+    background: #2196F3;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: background 0.2s;
+  }
+  .btn-details:hover { background: #1976D2; }
+  .btn-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-icon:hover { background: #f5f5f5; }
+  .btn-icon svg { width: 16px; height: 16px; color: #888; }
+  .bookmark-btn {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .bookmark-btn svg { width: 18px; height: 18px; color: #ccc; }
+  .bookmark-btn:hover svg { color: #2196F3; }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar-box {
+    background: #fff;
+    border-radius: 14px;
+    padding: 24px 20px;
+    border: 1px solid #e8ecf0;
+  }
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2196F3;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .filter-group {
+    margin-bottom: 16px;
+  }
+  .filter-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 6px;
+    text-align: right;
+  }
+  .filter-select {
+    width: 100%;
+    padding: 10px 14px;
+    padding-left: 32px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-family: 'Cairo', sans-serif;
+    font-size: 13px;
+    color: #888;
+    background: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+    text-align: right;
+    direction: rtl;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .filter-select:focus {
+    outline: none;
+    border-color: #2196F3;
+  }
+  .btn-reset {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #2196F3;
+    background: #fff;
+    color: #2196F3;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+  }
+  .btn-reset:hover { background: #E3F2FD; }
+  .btn-apply {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: #2196F3;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .btn-apply:hover { background: #1976D2; }
+
+  /* ===== PAGINATION ===== */
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 10px;
+  }
+  .page-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .page-btn:hover { background: #E3F2FD; color: #2196F3; }
+  .page-btn.active {
+    background: #2196F3;
+    color: #fff;
+    border-color: #2196F3;
+  }
+  .page-dots {
+    padding: 0 4px;
+    color: #999;
+    font-size: 14px;
+  }
+
+  /* ===== COLORS FOR CARD ICONS ===== */
+  .bg-blue-light { background: #E3F2FD; }
+  .bg-green-light { background: #E8F5E9; }
+  .bg-purple-light { background: #F3E5F5; }
+  .bg-orange-light { background: #FFF3E0; }
+  .bg-red-light { background: #FFEBEE; }
+  .bg-teal-light { background: #E0F2F1; }
+  .bg-yellow-light { background: #FFFDE7; }
+  .bg-pink-light { background: #FCE4EC; }
+
+  .text-blue { color: #2196F3; }
+  .text-green { color: #4CAF50; }
+  .text-purple { color: #9C27B0; }
+  .text-orange { color: #FF9800; }
+  .text-red { color: #F44336; }
+  .text-teal { color: #009688; }
+  .text-yellow { color: #FFC107; }
+
+  /* ===== LESSON PLANS (ACCORDION) ===== */
+  .lesson-plans-page {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 20px 40px;
+  }
+  .lesson-plans-page.active { display: block; }
+  .accordion-item {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e8ecf0;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .accordion-item:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .accordion-header:hover { background: #fafbfc; }
+  .accordion-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+  }
+  .accordion-arrow {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+    color: #999;
+  }
+  .accordion-item.open .accordion-arrow {
+    transform: rotate(180deg);
+  }
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .accordion-item.open .accordion-body {
+    max-height: 800px;
+  }
+  .accordion-content {
+    padding: 0 24px 20px;
+  }
+  .lesson-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+  }
+  .lesson-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #444;
+    border-bottom: 1px solid #f5f5f5;
+    direction: rtl;
+    text-align: right;
+  }
+  .lesson-list li:last-child { border-bottom: none; }
+  .lesson-list li .lesson-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .lesson-list li .lesson-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .accordion-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    direction: rtl;
+  }
+  .btn-copy-embed {
+    padding: 8px 22px;
+    border-radius: 8px;
+    background: #2196F3;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+  }
+  .btn-copy-embed:hover { background: #1976D2; }
+  .btn-view-plan {
+    padding: 8px 22px;
+    border-radius: 8px;
+    background: #fff;
+    color: #555;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #e0e0e0;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-view-plan:hover { background: #f5f5f5; border-color: #ccc; }
+  .plans-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 20px;
+  }
+
+  @media (max-width: 1100px) {
+    .cards-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .main-layout { flex-direction: column; }
+    .sidebar { width: 100%; }
+    .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 500px) {
+    .cards-grid { grid-template-columns: 1fr; }
+    .header { padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <a href="#" class="logo">
+    <svg class="logo-icon" viewBox="0 0 60 50" xmlns="http://www.w3.org/2000/svg">
+      <!-- Open book shape -->
+      <path d="M30 12 L10 18 L10 42 L30 38 L50 42 L50 18 Z" fill="none" stroke="#2196F3" stroke-width="2.2" stroke-linejoin="round"/>
+      <line x1="30" y1="12" x2="30" y2="38" stroke="#2196F3" stroke-width="2"/>
+      <!-- Left pages -->
+      <path d="M14 20 L28 17" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <path d="M14 24 L28 21" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <path d="M14 28 L28 25" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <!-- Right pages -->
+      <path d="M32 17 L46 20" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <path d="M32 21 L46 24" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <path d="M32 25 L46 28" stroke="#2196F3" stroke-width="1" opacity="0.4"/>
+      <!-- Green pixel squares -->
+      <rect x="18" y="4" width="5" height="5" rx="1" fill="#4CAF50"/>
+      <rect x="24" y="4" width="5" height="5" rx="1" fill="#4CAF50" opacity="0.7"/>
+      <rect x="24" y="9.5" width="5" height="5" rx="1" fill="#4CAF50" opacity="0.5"/>
+      <rect x="18" y="9.5" width="5" height="5" rx="1" fill="#4CAF50" opacity="0.3"/>
+      <rect x="30" y="6" width="4" height="4" rx="1" fill="#4CAF50" opacity="0.4"/>
+      <!-- Small dot accent -->
+      <circle cx="16" cy="42" r="2" fill="#8BC34A"/>
+    </svg>
+    <span class="blue">schoo</span><span class="green">brary</span>
+  </a>
+  <div class="user-profile">
+    <div class="user-avatar">ME</div>
+    <div class="user-info">
+      <div class="user-name">Moamen Elewa</div>
+      <div class="user-label">حسابي</div>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs-container">
+  <div class="tabs">
+    <button class="tab active">عناصر تعليمية</button>
+    <button class="tab">خطط دروس</button>
+  </div>
+</div>
+
+<!-- TAB PAGES -->
+<!-- PAGE 1: عناصر تعليمية -->
+<div class="main-layout tab-page active" id="tabElements">
+  <!-- SIDEBAR (right side in RTL) -->
+  <div class="sidebar">
+    <div class="sidebar-box">
+      <div class="sidebar-title">التصفية</div>
+
+      <div class="filter-group">
+        <div class="filter-label">الدرس</div>
+        <select class="filter-select">
+          <option>الدرس</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">النوع</div>
+        <select class="filter-select">
+          <option>النوع</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">نوع المحتوى</div>
+        <select class="filter-select">
+          <option>نوع المحتوى</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">ترخيص المحتوى</div>
+        <select class="filter-select">
+          <option>ترخيص المحتوى</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">مدى ارتباط المنهج</div>
+        <select class="filter-select">
+          <option>مدى ارتباط المنهج</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <div class="filter-label">الاستخدام التعليمي</div>
+        <select class="filter-select">
+          <option>الاستخدام التعليمي</option>
+        </select>
+      </div>
+
+      <button class="btn-reset">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        إعادة تعيين
+      </button>
+      <button class="btn-apply">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        تطبيق الفلاتر
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENT AREA -->
+  <div class="content-area">
+    <!-- Content Type Header -->
+    <div class="content-type-header">
+      <span>نوع المحتوى</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <polyline points="22 4 12 14.01 9 11.01"/>
+      </svg>
+    </div>
+
+    <!-- ICON CAROUSEL -->
+    <div class="carousel-wrapper">
+      <button class="carousel-arrow left" onclick="document.querySelector('.carousel').scrollBy({left: -200, behavior:'smooth'})">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel">
+        <!-- كتب -->
+        <div class="carousel-item">
+          <div class="icon-box bg-blue-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <span>كتب</span>
+        </div>
+        <!-- فيديوهات -->
+        <div class="carousel-item">
+          <div class="icon-box bg-red-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F44336" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+          </div>
+          <span>فيديوهات</span>
+        </div>
+        <!-- صور -->
+        <div class="carousel-item">
+          <div class="icon-box bg-green-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <span>صور</span>
+        </div>
+        <!-- بطاقات -->
+        <div class="carousel-item">
+          <div class="icon-box bg-purple-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9C27B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span>بطاقات</span>
+        </div>
+        <!-- أسئلة -->
+        <div class="carousel-item">
+          <div class="icon-box bg-teal-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <span>أسئلة</span>
+        </div>
+        <!-- اختبارات -->
+        <div class="carousel-item">
+          <div class="icon-box bg-blue-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <span>اختبارات</span>
+        </div>
+        <!-- مقالات -->
+        <div class="carousel-item">
+          <div class="icon-box bg-orange-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF9800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </div>
+          <span>مقالات</span>
+        </div>
+        <!-- عروض تقديمية -->
+        <div class="carousel-item">
+          <div class="icon-box bg-green-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="10 9 12 7 14 9"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
+          </div>
+          <span>عروض تقديمية</span>
+        </div>
+        <!-- أوراق عمل -->
+        <div class="carousel-item">
+          <div class="icon-box bg-purple-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#9C27B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <span>أوراق عمل</span>
+        </div>
+        <!-- إنفوجرافيك -->
+        <div class="carousel-item">
+          <div class="icon-box bg-pink-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#E91E63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <span>إنفوجرافيك</span>
+        </div>
+        <!-- نماذج ثلاثية الأبعاد -->
+        <div class="carousel-item">
+          <div class="icon-box bg-teal-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <span>نماذج ثلاثية الأبعاد</span>
+        </div>
+      </div>
+      <button class="carousel-arrow right" onclick="document.querySelector('.carousel').scrollBy({left: 200, behavior:'smooth'})">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+      <div class="breadcrumb">
+        <span>السعودية</span>
+        <span class="sep">‹</span>
+        <span>التعليم العام</span>
+        <span class="sep">‹</span>
+        <span>الصف الأول المتوسط</span>
+        <span class="sep">/</span>
+        <span>الرياضيات</span>
+        <span class="sep">/</span>
+        <span>الفصل الدراسي الأول</span>
+      </div>
+      <div class="results-count">306 نتيجة</div>
+    </div>
+
+    <!-- CARDS -->
+    <div class="cards-grid" id="cardsGrid"></div>
+
+    <!-- PAGINATION -->
+    <div class="pagination" dir="ltr">
+      <button class="page-btn">«</button>
+      <button class="page-btn">‹</button>
+      <button class="page-btn active">1</button>
+      <button class="page-btn">2</button>
+      <button class="page-btn">3</button>
+      <span class="page-dots">...</span>
+      <button class="page-btn">33</button>
+      <button class="page-btn">34</button>
+      <button class="page-btn">›</button>
+      <button class="page-btn">»</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- PAGE 2: خطط دروس -->
+<div class="lesson-plans-page tab-page" id="tabPlans">
+
+  <!-- Accordion 1: العلم وعملياته (OPEN) -->
+  <div class="accordion-item open">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">العلم وعملياته</div>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <ul class="lesson-list">
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            ماهية العلوم والاسئلة التي لاتجيب عنها
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            الفروع الثلاثة للعلوم
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            المهارات التي يستخدمها العلماء
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            المقصود بالفرضية
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            الاختلاف بين الملاحظة والاستنتاج
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+            الأسلوب العلمي
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            شرح أهداف تعلم الدرس
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            المقارنة بين النظريات والقوانين
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            العلم وعملياته
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            المنهج العلمي
+          </li>
+        </ul>
+        <div class="accordion-actions">
+          <button class="btn-copy-embed">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            نسخ كود التشمين
+          </button>
+          <button class="btn-view-plan">عرض الخطة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accordion 2: النماذج العلمية (OPEN) -->
+  <div class="accordion-item open">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">النماذج العلمية</div>
+    </div>
+    <div class="accordion-body">
+      <div class="accordion-content">
+        <ul class="lesson-list">
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            أنواع النماذج العلمية
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            تغير النماذج بتطور المعرفة
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+            الاستقصاء العلمي
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+            الفرضية العلمية
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+            شرح أهداف تعلم الدرس
+          </li>
+          <li>
+            <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
+            النماذج العلمية
+          </li>
+        </ul>
+        <div class="accordion-actions">
+          <button class="btn-copy-embed">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            نسخ كود التشمين
+          </button>
+          <button class="btn-view-plan">عرض الخطة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Collapsed accordions -->
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">تقويم التفسيرات العلمية</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>تقويم التفسيرات العلمية</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">الحركة</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الحركة</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">قوانين نيوتن للحركة</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>قوانين نيوتن للحركة</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">الشغل والآلات البسيطة</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الشغل والآلات البسيطة</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">الخواص والتغيرات الفيزيائية</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الخواص والتغيرات الفيزيائية</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+      <div class="accordion-arrow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="accordion-title">الخواص والتغيرات الكيميائية</div>
+    </div>
+    <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الخواص والتغيرات الكيميائية</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التشمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+  </div>
+
+  <!-- Plans Pagination -->
+  <div class="plans-pagination" dir="ltr">
+    <button class="page-btn">‹</button>
+    <button class="page-btn active">1</button>
+    <button class="page-btn">2</button>
+    <button class="page-btn">›</button>
+  </div>
+</div>
+
+<script>
+  // Card data
+  const cards = [
+    {
+      title: 'حل التناسبات (الصف الأول المتوسط)',
+      type: 'شرح خارجي',
+      typeSub: 'External Learning Resources',
+      meta1: 'فيديو تعليمي', meta2: '8:45',
+      bg: '#E3F2FD', accent: '#2196F3',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+      badgeBg: '#2196F3'
+    },
+    {
+      title: 'أوراق عمل: التناسب والتطبيقات',
+      type: 'أوراق عمل',
+      typeSub: 'Worksheets',
+      meta1: 'ملف PDF', meta2: '2.4 م.ب',
+      bg: '#F3E5F5', accent: '#9C27B0',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`,
+      badgeBg: '#9C27B0'
+    },
+    {
+      title: 'صور توضيحية: التناسب في الحياة اليومية',
+      type: 'صور تعليمية',
+      typeSub: 'Educational Images',
+      meta1: 'مجموعة صور', meta2: '12 صورة',
+      bg: '#E8F5E9', accent: '#4CAF50',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
+      badgeBg: '#4CAF50'
+    },
+    {
+      title: 'عرض تقديمي: مفهوم التناسب',
+      type: 'عرض تقديمي',
+      typeSub: 'Presentation',
+      meta1: 'شرائح', meta2: '15 شريحة',
+      bg: '#FFF3E0', accent: '#FF9800',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>`,
+      badgeBg: '#FF9800'
+    },
+    {
+      title: 'بطاقات تعليمية: مصطلحات التناسب',
+      type: 'بطاقات تعليمية',
+      typeSub: 'Flashcards',
+      meta1: 'مجموعة بطاقات', meta2: '20 بطاقة',
+      bg: '#FFFDE7', accent: '#FFC107',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 8v4l3 2"/></svg>`,
+      badgeBg: '#F9A825'
+    },
+    {
+      title: 'أسئلة تدريبية على التناسب',
+      type: 'أسئلة تدريبية',
+      typeSub: 'Practice Questions',
+      meta1: '20 سؤال', meta2: 'مع الحلول',
+      bg: '#E0F2F1', accent: '#009688',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+      badgeBg: '#009688'
+    },
+    {
+      title: 'اختبار قصير: التناسب',
+      type: 'اختبار قصير',
+      typeSub: 'Quick Quiz',
+      meta1: '10 أسئلة', meta2: 'مع الحلول',
+      bg: '#E3F2FD', accent: '#2196F3',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+      badgeBg: '#2196F3'
+    },
+    {
+      title: 'مقال: أهمية التناسب في الرياضيات',
+      type: 'مقال تعليمي',
+      typeSub: 'Educational Article',
+      meta1: 'مقال', meta2: '5 دقائق قراءة',
+      bg: '#FFF3E0', accent: '#FF9800',
+      badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+      badgeBg: '#FF9800'
+    }
+  ];
+
+  // Decorative SVG background for thumbnails
+  function decoSvg(accent) {
+    const light = accent + '30';
+    return `<svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <circle cx="250" cy="20" r="40" fill="${light}"/>
+      <circle cx="40" cy="140" r="30" fill="${light}"/>
+      <polygon points="20,30 35,5 50,30" fill="${accent}" opacity="0.15"/>
+      <polygon points="260,140 275,115 290,140" fill="${accent}" opacity="0.15"/>
+      <rect x="140" y="10" width="8" height="8" rx="2" fill="${accent}" opacity="0.2" transform="rotate(20 144 14)"/>
+      <rect x="70" y="25" width="6" height="6" rx="1" fill="${accent}" opacity="0.25" transform="rotate(-15 73 28)"/>
+      <circle cx="180" cy="140" r="4" fill="${accent}" opacity="0.2"/>
+      <circle cx="100" cy="15" r="3" fill="${accent}" opacity="0.25"/>
+      <line x1="200" y1="30" x2="220" y2="10" stroke="${accent}" stroke-width="1.5" opacity="0.15"/>
+      <line x1="50" y1="80" x2="30" y2="60" stroke="${accent}" stroke-width="1.5" opacity="0.15"/>
+    </svg>`;
+  }
+
+  // Render cards
+  const grid = document.getElementById('cardsGrid');
+  cards.forEach(c => {
+    grid.innerHTML += `
+    <div class="card">
+      <div class="card-thumbnail" style="background:${c.bg}">
+        <div class="card-thumbnail-bg">${decoSvg(c.accent)}</div>
+        <div class="card-type-badge" style="background:${c.badgeBg}">${c.badgeIcon}</div>
+        <div class="card-thumbnail-content">
+          <div class="schoopedia-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+            <span>SchooPedia</span>
+          </div>
+          <div class="card-type-label" style="color:${c.accent}">${c.type}</div>
+          <div class="card-type-sublabel">${c.typeSub}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${c.title}</div>
+        <div class="card-meta">
+          <span>${c.meta1}</span>
+          <span class="dot"></span>
+          <span>${c.meta2}</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="bookmark-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <div class="card-actions-right">
+          <button class="btn-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+          <button class="btn-details">تفاصيل</button>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  // Tab switching with page visibility
+  const tabs = document.querySelectorAll('.tab');
+  const tabElements = document.getElementById('tabElements');
+  const tabPlans = document.getElementById('tabPlans');
+
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      if (i === 0) {
+        tabElements.classList.add('active');
+        tabElements.style.display = 'flex';
+        tabPlans.classList.remove('active');
+        tabPlans.style.display = 'none';
+      } else {
+        tabElements.classList.remove('active');
+        tabElements.style.display = 'none';
+        tabPlans.classList.add('active');
+        tabPlans.style.display = 'block';
+      }
+    });
+  });
+
+  // Accordion toggle
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Pagination
+  document.querySelectorAll('.page-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

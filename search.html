@@ -8,67 +8,267 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --ink:#24364B;--ink-3:#0D3B7A;--text:#24364B;--bone:#F8FBFF;--paper:#fff;
-      --blue:#3A7BD5;--green:#3A9D5D;--butter:#F26A2E;--muted:#6B7C8F;--border:#D8E6F5;--mist:#D8E6F5;
+    :root {
+      --ink: #24364B;
+      --ink-3: #0D3B7A;
+      --text: #24364B;
+      --bone: #F8FBFF;
+      --paper: #FFFFFF;
+      --blue: #3A7BD5;
+      --blue-deep: #1565C0;
+      --green: #3A9D5D;
+      --butter: #F26A2E;
+      --muted: #6B7C8F;
+      --border: #D8E6F5;
+      --mist: #D8E6F5;
+      --shadow-md: 0 10px 32px rgba(58,123,213,.14);
+      --shadow-lg: 0 24px 70px rgba(36,54,75,.18);
     }
-    *{box-sizing:border-box} body{margin:0;background:var(--bone);color:var(--text);font-family:"IBM Plex Sans Arabic","IBM Plex Sans",system-ui,sans-serif}
-    .container{max-width:1280px;margin:0 auto;padding:0 24px}.display{font-family:"IBM Plex Sans Arabic","IBM Plex Sans",sans-serif}
-    .chip{border:1px solid var(--border);background:#fff;color:var(--text);border-radius:999px;height:40px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;cursor:pointer}
-    .chip.dark{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff}.chip.dark.on{background:var(--butter);border-color:var(--butter)}
-    .btn{border:0;border-radius:999px;height:46px;padding:0 22px;font-weight:700;cursor:pointer;font-family:inherit}.btn-primary{background:var(--blue);color:#fff}.btn-orange{background:var(--butter);color:#fff}.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--mist)}
-    .card{background:#fff;border:1px solid var(--border);border-radius:20px}
-    header{position:sticky;top:0;z-index:30;background:rgba(248,251,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-    .header-row{height:72px;display:flex;justify-content:space-between;align-items:center}.user-box{display:flex;gap:10px;align-items:center}
-    .avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
-    .hero{background:radial-gradient(circle at 86% 18%,rgba(84,181,63,.16),transparent 34%),linear-gradient(135deg,var(--ink-3),var(--blue),var(--green));color:#fff;padding:80px 0 100px}
-    .hero h1{margin:0;text-align:center;font-size:clamp(36px,6vw,72px)} .hero p{margin:16px auto 0;max-width:700px;text-align:center;color:rgba(255,255,255,.85);line-height:1.7;font-size:17px}
-    .search-shell{max-width:900px;margin:34px auto 0}.search-bar{background:#fff;border-radius:999px;padding:7px;display:flex;align-items:center;gap:10px;box-shadow:0 30px 80px rgba(13,34,64,.35)}
-    .search-input{flex:1;border:0;outline:0;background:transparent;height:50px;font-size:15px;color:var(--text);text-align:right;font-family:inherit}
-    .filter-triggers{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .filter-triggers .chip{min-height:52px;padding-inline:24px;font-size:18px;font-weight:700}
-    .drawer-wrap{max-width:1160px;margin:-56px auto 0;padding:0 24px;position:relative;z-index:10}.drawer-card{padding:22px}
-    .drawer-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}.drawer-title{margin:0;font-size:clamp(24px,4vw,56px);color:var(--ink)} .drawer-sub{margin:8px 0 0;color:var(--muted);font-size:clamp(14px,2vw,20px)}
-    .field-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field-label{font-size:12px;color:var(--muted);font-weight:600}
-    .select{height:44px;border-radius:12px;border:1px solid var(--border);background:#fff;padding:0 12px;display:flex;align-items:center;justify-content:space-between;color:var(--text)} .select.active{border-color:var(--blue);background:rgba(58,123,213,.08)}
-    .results{padding:52px 0 24px}.results h2{margin:8px 0 0;font-size:clamp(24px,4vw,32px)} .meta-filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 20px;padding-bottom:18px;border-bottom:1px solid var(--mist)}
-    .result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.result-top{height:120px;border-radius:16px 16px 0 0;display:grid;place-items:center;color:#fff;font-size:28px;font-weight:700}.result-body{padding:14px}
-    .browse{padding:50px 0 80px}.browse-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    .browse-media{height:130px;position:relative;overflow:hidden;border-radius:16px 16px 0 0}.browse-media img{width:100%;height:100%;object-fit:cover;opacity:.82}
-    .browse-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,59,122,.12),rgba(13,59,122,.62))}
-    .browse-label{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.95);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700}
-    .browse-body{padding:14px}
-    .curr-wrap{padding:26px 0 40px}
-    .curr-layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
-    .curr-main{min-width:0}
-    .curr-side{padding:14px}
-    .curr-tabs{display:flex;justify-content:center;margin:10px 0 20px}
-    .curr-tabs .tab-box{display:flex;gap:8px;background:#fff;border:1px solid var(--mist);padding:8px;border-radius:10px}
-    .curr-tabs button{height:44px;padding:0 24px;border-radius:8px;border:1px solid var(--mist);background:#fff;color:var(--ink);font-weight:700;cursor:pointer}
-    .curr-tabs button.active{background:var(--blue);border-color:var(--blue);color:#fff}
-    .type-strip{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:10px;margin-bottom:14px}
-    .type-card{border:1px solid var(--mist);background:#fff;border-radius:16px;padding:10px 6px;text-align:center;font-size:13px;font-weight:600}
-    .crumb{color:var(--blue);font-weight:600;margin:10px 0 14px;font-size:20px}
-    .curr-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-    .curr-item{padding:12px}
-    .curr-item h4{margin:10px 0 8px;font-size:19px;line-height:1.45;color:var(--ink)}
-    .curr-meta{font-size:14px;color:var(--muted)}
-    .curr-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--mist)}
-    .side-title{font-size:32px;font-weight:700;color:var(--blue);margin:8px 0 14px}
-    .side-group{margin-bottom:14px}
-    .side-group .field-label{display:block;margin-bottom:6px;font-size:20px;color:var(--ink);font-weight:700}
-    .side-group .select{height:44px}
-    .pager{display:flex;justify-content:center;gap:8px;margin-top:20px}
-    .pager span{min-width:36px;height:32px;border-radius:8px;border:1px solid var(--mist);display:grid;place-items:center;background:#fff;color:var(--ink);font-weight:700}
-    .pager span.active{background:var(--blue);color:#fff;border-color:var(--blue)}
-    @media (max-width:1200px){.type-strip{grid-template-columns:repeat(6,minmax(0,1fr))}.curr-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media (max-width:1100px){.result-grid,.browse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.curr-layout{grid-template-columns:1fr}.curr-side{order:-1}.curr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:900px){.container{padding:0 16px}.hero{padding:64px 0 82px}.search-bar{border-radius:20px}.search-shell{max-width:100%}.drawer-wrap{padding:0 16px}.field-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.result-grid,.browse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.type-strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
-    @media (max-width:600px){.header-row{height:64px}.hero h1{font-size:clamp(28px,9vw,40px)}.hero p{font-size:14px}.search-bar{flex-direction:column;align-items:stretch;border-radius:16px}.search-input{height:44px}.filter-triggers{justify-content:stretch}.filter-triggers .chip{width:100%;justify-content:center}.field-grid-4,.result-grid,.browse-grid,.curr-grid{grid-template-columns:1fr}.drawer-card{padding:16px}.type-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bone);
+      color: var(--text);
+      font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+    }
+    .display { font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", sans-serif; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .chip {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 999px;
+      height: 40px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--blue); color: var(--blue); }
+    .chip.dark {
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.30);
+      color: #fff;
+      backdrop-filter: blur(8px);
+    }
+    .chip.dark.on { background: var(--butter); border-color: var(--butter); color: #fff; }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      height: 46px;
+      padding: 0 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--mist); }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    header.app-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(248,251,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-row {
+      height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .user-box { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(circle at 86% 18%, rgba(84,181,63,.16), transparent 34%), linear-gradient(135deg, var(--ink-3), var(--blue), var(--green));
+      color: #fff;
+      padding: 80px 0 100px;
+    }
+    .hero h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.1;
+    }
+    .hero p {
+      margin: 16px auto 0;
+      max-width: 700px;
+      text-align: center;
+      color: rgba(255,255,255,.85);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .search-shell { max-width: 900px; margin: 34px auto 0; }
+    .search-bar {
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 30px 80px rgba(13,34,64,.35);
+    }
+    .search-input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      height: 50px;
+      font-size: 15px;
+      color: var(--text);
+      text-align: right;
+      font-family: inherit;
+    }
+    .filter-triggers {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .filter-triggers .chip { min-height: 46px; padding-inline: 18px; font-size: 15px; }
+
+    .drawer-wrap {
+      max-width: 1160px;
+      margin: -56px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+    .drawer-card { padding: 22px; }
+    .drawer-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+    .drawer-title { margin: 0; font-size: clamp(24px, 4vw, 42px); color: var(--ink); }
+    .drawer-sub { margin: 8px 0 0; color: var(--muted); font-size: clamp(14px, 2vw, 20px); }
+    .field-grid-5, .field-grid-4 { display: grid; gap: 10px; }
+    .field-grid-5 { grid-template-columns: repeat(5, minmax(0,1fr)); }
+    .field-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .select {
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--text);
+      font-family: inherit;
+    }
+    .select.active { border-color: var(--blue); background: rgba(58,123,213,.08); }
+
+    .results { padding: 52px 0 24px; }
+    .results h2 { margin: 8px 0 0; font-size: clamp(24px,4vw,32px); }
+    .meta-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 20px; padding-bottom: 18px; border-bottom: 1px solid var(--mist); }
+    .popular { margin-bottom: 18px; }
+    .popular-title { font-size: 13px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+    .result-top {
+      height: 120px;
+      border-radius: 16px 16px 0 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .result-body { padding: 14px; }
+
+    .browse { padding: 50px 0 80px; }
+    .browse-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 14px;
+    }
+    .browse-media { height: 130px; position: relative; overflow: hidden; border-radius: 16px 16px 0 0; }
+    .browse-media img { width: 100%; height: 100%; object-fit: cover; opacity: .82; }
+    .browse-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(13,59,122,.12), rgba(13,59,122,.62));
+    }
+    .browse-label {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(255,255,255,.95);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .browse-body { padding: 14px; }
+
+    @media (max-width: 1100px) {
+      .result-grid, .browse-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .field-grid-5 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .container { padding: 0 16px; }
+      .hero { padding: 64px 0 82px; }
+      .search-bar { border-radius: 20px; }
+      .search-shell { max-width: 100%; }
+      .drawer-wrap { padding: 0 16px; }
+      .field-grid-4, .field-grid-5 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .result-grid, .browse-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .header-row { height: 64px; }
+      .hero h1 { font-size: clamp(28px, 9vw, 40px); }
+      .hero p { font-size: 14px; }
+      .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 16px;
+      }
+      .search-input { height: 44px; }
+      .filter-triggers { justify-content: stretch; }
+      .filter-triggers .chip { width: 100%; justify-content: center; }
+      .field-grid-4, .field-grid-5 { grid-template-columns: 1fr; }
+      .result-grid, .browse-grid { grid-template-columns: 1fr; }
+      .drawer-card { padding: 16px; }
+    }
   </style>
 </head>
 <body>
   <div id="root"></div>
+
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -83,169 +283,192 @@
       { key: "articles", label: "مقالات", desc: "مقالات وتقارير علمية", count: "+ 900 مقال", img: "https://picsum.photos/seed/articles/640/360" },
       { key: "presentations", label: "عروض", desc: "عروض جاهزة للفصل", count: "+ 440 عرض", img: "https://picsum.photos/seed/presentations/640/360" },
     ];
+
+    const SUGGESTIONS = ["الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية","الدراسات الإسلامية","الصف الأول المتوسط","فيديوهات تعليمية"];
     const RESULTS = [
       { t: "شرح المعادلات الخطية", s: "الرياضيات", g: "الأول المتوسط", c: "السعودية · الوزارة", d: "linear-gradient(160deg,#0070B0 0%, #0A2740 100%)" },
       { t: "أساسيات العلوم", s: "العلوم", g: "السادس", c: "الإمارات · الوزارة", d: "linear-gradient(160deg,#3FB0B0 0%, #1A6A6A 100%)" },
       { t: "اختبار نهاية الدرس", s: "الرياضيات", g: "الثاني المتوسط", c: "السعودية", d: "linear-gradient(160deg,#80C030 0%, #4A7A14 100%)" },
       { t: "ملخص الدرس الأول", s: "اللغة العربية", g: "الخامس", c: "الكويت", d: "linear-gradient(160deg,#F2D096 0%, #C98A2B 100%)" },
     ];
-    const CURRICULUM_RESULTS = [
-      { type: "فيديو تعليمي", title: "حل التناسب (الصف الأول المتوسط)", meta: "8:45", extra: "فيديو تعليمي" },
-      { type: "ملف PDF", title: "أوراق عمل: التناسب والتطبيقات", meta: "2.4 م.ب", extra: "ملف PDF" },
-      { type: "مجموعة صور", title: "صور توضيحية: التناسب في الحياة اليومية", meta: "12 صورة", extra: "مجموعة صور" },
-      { type: "شرائح", title: "عرض تقديمي: مفهوم التناسب", meta: "15 شريحة", extra: "شرائح" },
-      { type: "مجموعة بطاقات", title: "بطاقات تعليمية: مصطلحات التناسب", meta: "20 بطاقة", extra: "بطاقات" },
-      { type: "أسئلة", title: "أسئلة تدريبية على التناسب", meta: "20 سؤال", extra: "مع الحلول" },
-      { type: "اختبار", title: "اختبار قصير: التناسب", meta: "10 أسئلة", extra: "مع الحلول" },
-      { type: "مقال", title: "مقال: أهمية التناسب في الرياضيات", meta: "5 دقائق قراءة", extra: "مقال" }
-    ];
 
-    function App(){
-      const [query,setQuery]=React.useState("");
-      const [openDrawer,setOpenDrawer]=React.useState(null);
-      const [topicSelected,setTopicSelected]=React.useState(false);
-      const [currSelected,setCurrSelected]=React.useState(false);
-      const [showResults,setShowResults]=React.useState(false);
-      const [selectedTypes,setSelectedTypes]=React.useState(new Set());
-      const [searchedText,setSearchedText]=React.useState("");
-      const [viewMode,setViewMode]=React.useState("home");
-      const hasFilters=topicSelected||currSelected||selectedTypes.size>0||searchedText.trim().length>0;
+    function App() {
+      const [query, setQuery] = React.useState("");
+      const [openDrawer, setOpenDrawer] = React.useState(null);
+      const [topicSelected, setTopicSelected] = React.useState(false);
+      const [currSelected, setCurrSelected] = React.useState(false);
+      const [showResults, setShowResults] = React.useState(false);
+      const [selectedTypes, setSelectedTypes] = React.useState(new Set());
 
-      const toggleType=(k)=>{const n=new Set(selectedTypes);n.has(k)?n.delete(k):n.add(k);setSelectedTypes(n);};
-      const submitSearch=()=>{setSearchedText(query.trim());setShowResults(true);setViewMode("home");}
-      const applyDrawer=()=>{
-        if(openDrawer==="topic"){setTopicSelected(true);setViewMode("home");}
-        if(openDrawer==="curriculum"){setCurrSelected(true);setViewMode("curriculum");}
-        setSearchedText(query.trim());
+      const hasFilters = topicSelected || currSelected || selectedTypes.size > 0 || query.trim().length > 0;
+
+      const toggleType = (k) => {
+        const n = new Set(selectedTypes);
+        n.has(k) ? n.delete(k) : n.add(k);
+        setSelectedTypes(n);
+      };
+
+      const applyDrawer = () => {
+        if (openDrawer === "topic") setTopicSelected(true);
+        if (openDrawer === "curriculum") {
+          setCurrSelected(true);
+          window.location.href = "schoobrary-offline.html";
+          return;
+        }
         setShowResults(true);
         setOpenDrawer(null);
-      }
+      };
 
-      return <>
-        <header><div className="container header-row">
-          <img src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary" style={{height:40,width:"auto"}} />
-          <div className="user-box"><div className="avatar">ME</div><div><div style={{fontWeight:700,fontSize:14}}>Moamen Elewa</div><div style={{fontSize:11,color:"var(--muted)"}}>حسابي</div></div></div>
-        </div></header>
-
-        <section className="hero"><div className="container">
-          <h1 className="display">ابحث في سكوبراري</h1>
-          <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
-          <div className="search-shell">
-            <div className="search-bar">
-              <button className="btn btn-primary" onClick={submitSearch}>بحث</button>
-              <input className="search-input" value={query} onChange={(e)=>setQuery(e.target.value)} onKeyDown={(e)=>e.key==="Enter"&&submitSearch()} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
-            </div>
-            <div className="filter-triggers">
-              <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع / المادة</button>
-              <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>الدولة / المنهج</button>
-              <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="type"?null:"type")}>نوع المصدر</button>
-            </div>
-          </div>
-        </div></section>
-
-        {openDrawer && <div className="drawer-wrap"><div className="card drawer-card">
-          <div className="drawer-head">
-            <div>
-              <h3 className="display drawer-title">{openDrawer==="topic"?"الموضوع أو المادة":openDrawer==="curriculum"?"الدولة / المنهج":"نوع المصدر"}</h3>
-              <p className="drawer-sub">
-                {openDrawer==="topic"&&"حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به."}
-                {openDrawer==="curriculum"&&"اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}
-                {openDrawer==="type"&&"اختر نوع المصدر للوصول إلى المحتوى المناسب."}
-              </p>
-            </div>
-            <button className="btn btn-ghost" onClick={()=>setOpenDrawer(null)}>إغلاق</button>
-          </div>
-
-          {openDrawer==="topic" && <div className="field-grid-4">
-            {[
-              ["الموضوع الرئيسي","الجبر",true],["المجال","اختر...",false],["المحور","اختر...",false],["الموضوع الفرعي","اختر...",false]
-            ].map(([l,v,a])=><div className="field" key={l}><div className="field-label">{l}</div><div className={`select ${a?"active":""}`}><span>{v}</span><span>▾</span></div></div>)}
-          </div>}
-
-          {openDrawer==="curriculum" && <div className="field-grid-4">
-            {[
-              ["الدولة","السعودية",true],["المنهج","وزارة التعليم",true],["الصف الدراسي","الأول المتوسط",true],["المادة","الرياضيات",true]
-            ].map(([l,v,a])=><div className="field" key={l}><div className="field-label">{l}</div><div className={`select ${a?"active":""}`}><span>{v}</span><span>▾</span></div></div>)}
-          </div>}
-
-          {openDrawer==="type" && <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(120px,1fr))",gap:10}}>
-            {RTYPES.map(r=><button key={r.key} className="chip" style={{height:46,justifyContent:"center",borderColor:selectedTypes.has(r.key)?"var(--blue)":"var(--border)",background:selectedTypes.has(r.key)?"rgba(58,123,213,.1)":"#fff"}} onClick={()=>toggleType(r.key)}>{r.label}</button>)}
-          </div>}
-
-          <div style={{display:"flex",justifyContent:"space-between",marginTop:18,paddingTop:18,borderTop:"1px solid var(--mist)"}}>
-            <button className="btn btn-ghost">إعادة تعيين</button>
-            <button className="btn btn-orange" onClick={applyDrawer}>بحث</button>
-          </div>
-        </div></div>}
-
-        {showResults&&hasFilters&&viewMode==="home" && <section className="results"><div className="container">
-          <h2 className="display">نتائج البحث: {searchedText||"تم تطبيق المرشحات"}</h2>
-          <div className="meta-filters">
-            {currSelected&&<span className="chip">السعودية</span>}
-            {currSelected&&<span className="chip">المنهج</span>}
-            {topicSelected&&<span className="chip">الموضوع</span>}
-            {[...selectedTypes].map(k=><span className="chip" key={k}>{RTYPES.find(x=>x.key===k)?.label}</span>)}
-          </div>
-          <div className="result-grid">
-            {RESULTS.map((r,i)=><article key={i} className="card"><div className="result-top" style={{background:r.d}}>📘</div><div className="result-body"><div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div><div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div></div></article>)}
-          </div>
-        </div></section>}
-
-        {showResults&&hasFilters&&viewMode==="curriculum" && <section className="curr-wrap"><div className="container curr-layout">
-          <div className="curr-main">
-            <div className="curr-tabs">
-              <div className="tab-box">
-                <button className="active">عناصر تعليمية</button>
-                <button>خطط دروس</button>
+      return (
+        <>
+          <header className="app-header">
+            <div className="container header-row">
+              <img src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary" style={{ height: 40, width: "auto" }} />
+              <div className="user-box">
+                <div className="avatar">ME</div>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 14 }}>Moamen Elewa</div>
+                  <div style={{ fontSize: 11, color: "var(--muted)" }}>حسابي</div>
+                </div>
               </div>
             </div>
-            <div className="type-strip">
-              {["كتب","فيديوهات","صور","بطاقات","أسئلة","اختبارات","مقالات","عروض تقديمية","أوراق عمل","إنفوجرافيك","نماذج ثلاثية الأبعاد"].map(t=>(
-                <div className="type-card" key={t}>{t}</div>
-              ))}
+          </header>
+
+          <section className="hero">
+            <div className="container">
+              <h1 className="display">ابحث في سكوبراري</h1>
+              <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
+              <div className="search-shell">
+                <div className="search-bar">
+                  <button className="btn btn-primary" onClick={() => setShowResults(true)}>بحث</button>
+                  <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
+                </div>
+                <div className="filter-triggers">
+                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>+ الموضوع / المادة</button>
+                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>+ الدولة / المنهج</button>
+                  <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="type"?null:"type")}>+ نوع المورد</button>
+                </div>
+              </div>
             </div>
-            <div className="crumb">السعودية / التعليم العام / الصف الأول المتوسط / الرياضيات / الفصل الدراسي الأول</div>
-            <div style={{color:"var(--muted)",fontSize:30,fontWeight:700,marginBottom:12}}>306 نتيجة</div>
-            <div className="curr-grid">
-              {CURRICULUM_RESULTS.map((r,i)=>(
-                <article className="card curr-item" key={i}>
-                  <div style={{fontSize:14,color:"var(--muted)"}}>SchooPedia</div>
-                  <h4 className="display">{r.title}</h4>
-                  <div className="curr-meta">{r.meta} • {r.extra}</div>
-                  <div className="curr-actions">
-                    <span style={{color:"var(--muted)"}}>🔖</span>
-                    <button className="btn btn-primary" style={{height:34,padding:"0 16px",fontSize:14}}>تفاصيل</button>
+          </section>
+
+          {openDrawer && (
+            <div className="drawer-wrap">
+              <div className="card drawer-card">
+                <div className="drawer-head">
+                  <div>
+                    <h3 className="display drawer-title">{openDrawer === "topic" ? "الموضوع أو المادة" : openDrawer === "curriculum" ? "الدولة / المنهج" : "نوع المورد"}</h3>
+                    <p className="drawer-sub">
+                      {openDrawer === "topic" && "حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به."}
+                      {openDrawer === "curriculum" && "اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}
+                      {openDrawer === "type" && "اختر نوع المورد الذي تريد عرضه في نتائج البحث."}
+                    </p>
                   </div>
-                </article>
-              ))}
-            </div>
-            <div className="pager">
-              <span>«</span><span>3</span><span>2</span><span className="active">1</span><span>…</span><span>33</span><span>34</span><span>»</span>
-            </div>
-          </div>
-          <aside className="card curr-side">
-            <div className="side-title">التصفية</div>
-            {["الدرس","النوع","نوع المحتوى","ترخيص المحتوى","مدى ارتباط المنهج","الاستخدام التعليمي"].map(label=>(
-              <div className="side-group" key={label}>
-                <span className="field-label">{label}</span>
-                <div className="select"><span>{label}</span><span>▾</span></div>
-              </div>
-            ))}
-            <button className="btn btn-ghost" style={{width:"100%",marginTop:8}}>إعادة تعيين</button>
-            <button className="btn btn-primary" style={{width:"100%",marginTop:10}}>تطبيق الفلاتر</button>
-          </aside>
-        </div></section>}
+                  <button className="btn btn-ghost" onClick={() => setOpenDrawer(null)}>إغلاق</button>
+                </div>
 
-        <section className="browse"><div className="container">
-          <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>تصفح الموارد حسب النوع</h2>
-          <div className="browse-grid">
-            {RTYPES.map(r=><article key={r.key} className="card"><div className="browse-media"><img src={r.img} alt={r.label}/><div className="browse-overlay"/><div className="browse-label">{r.label}</div></div><div className="browse-body"><div style={{fontSize:13,color:"var(--muted)",lineHeight:1.6}}>{r.desc}</div><div style={{marginTop:10,paddingTop:10,borderTop:"1px solid var(--mist)",display:"flex",justifyContent:"space-between"}}><span style={{fontSize:12,color:"var(--muted)"}}>{r.count}</span><span style={{fontSize:13,color:"var(--blue)",fontWeight:700}}>استعراض</span></div></div></article>)}
-          </div>
-        </div></section>
-      </>
+                {openDrawer === "topic" && (
+                  <div className="field-grid-5">
+                    {[
+                      ["المادة","الرياضيات",true],["الموضوع الرئيسي","الجبر",true],["المجال","",false],["المحور","",false],["الموضوع الفرعي","",false]
+                    ].map(([label,value,active]) => (
+                      <div className="field" key={label}>
+                        <div className="field-label">{label}</div>
+                        <div className={`select ${active ? "active":""}`}><span>{value || "اختر..."}</span><span>▾</span></div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {openDrawer === "curriculum" && (
+                  <div className="field-grid-4">
+                    {[
+                      ["الدولة","السعودية",true],["المنهج","وزارة التعليم",true],["الصف الدراسي","الأول المتوسط",true],["الفصل الدراسي","الأول",true],
+                      ["المادة","الرياضيات",true],["الوحدة","",false],["الدرس","",false]
+                    ].map(([label,value,active]) => (
+                      <div className="field" key={label}>
+                        <div className="field-label">{label}</div>
+                        <div className={`select ${active ? "active":""}`}><span>{value || "اختر..."}</span><span>▾</span></div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {openDrawer === "type" && (
+                  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(120px,1fr))",gap:"10px"}}>
+                    {RTYPES.map(r => (
+                      <button key={r.key} className="chip" style={{height:46,justifyContent:"center",borderColor:selectedTypes.has(r.key)?"var(--blue)":"var(--border)",background:selectedTypes.has(r.key)?"rgba(58,123,213,.1)":"#fff"}} onClick={() => toggleType(r.key)}>
+                        {r.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div style={{display:"flex",justifyContent:"space-between",marginTop:18,paddingTop:18,borderTop:"1px solid var(--mist)"}}>
+                  <button className="btn btn-ghost">إعادة تعيين</button>
+                  <button className="btn" style={{background:"var(--butter)",color:"#fff"}} onClick={applyDrawer}>تطبيق المرشحات</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {showResults && hasFilters && (
+            <section className="results">
+              <div className="container">
+                <h2 className="display">{query ? `«${query}»` : "أحدث الموارد المضافة"}</h2>
+                <div className="meta-filters">
+                  <span className="chip">السعودية</span>
+                  <span className="chip">الوزارة</span>
+                  <span className="chip">الأول المتوسط</span>
+                  {[...selectedTypes].map((k) => <span className="chip" key={k}>{RTYPES.find(x => x.key===k)?.label}</span>)}
+                </div>
+                <div className="popular">
+                  <div className="popular-title">عمليات بحث شائعة</div>
+                  <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>{SUGGESTIONS.map(s => <button key={s} className="chip" onClick={() => setQuery(s)}>{s}</button>)}</div>
+                </div>
+                <div className="result-grid">
+                  {RESULTS.map((r,idx) => (
+                    <article key={idx} className="card">
+                      <div className="result-top" style={{background:r.d}}>📘</div>
+                      <div className="result-body">
+                        <div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div>
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          <section className="browse">
+            <div className="container">
+              <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>تصفح الموارد حسب النوع</h2>
+              <div className="browse-grid">
+                {RTYPES.map((r) => (
+                  <article key={r.key} className="card">
+                    <div className="browse-media">
+                      <img src={r.img} alt={r.label} />
+                      <div className="browse-overlay"></div>
+                      <div className="browse-label">{r.label}</div>
+                    </div>
+                    <div className="browse-body">
+                      <div style={{fontSize:13,color:"var(--muted)",lineHeight:1.6}}>{r.desc}</div>
+                      <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid var(--mist)",display:"flex",justifyContent:"space-between"}}>
+                        <span style={{fontSize:12,color:"var(--muted)"}}>{r.count}</span>
+                        <span style={{fontSize:13,color:"var(--blue)",fontWeight:700}}>استعراض</span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+        </>
+      );
     }
 
-    ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
   </script>
 </body>
 </html>
