@@ -26,7 +26,7 @@
     .search-shell{max-width:900px;margin:34px auto 0}.search-bar{background:#fff;border-radius:999px;padding:7px;display:flex;align-items:center;gap:10px;box-shadow:0 30px 80px rgba(13,34,64,.35)}
     .search-input{flex:1;border:0;outline:0;background:transparent;height:50px;font-size:15px;color:var(--text);text-align:right;font-family:inherit}
     .filter-triggers{margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-    .filter-triggers .chip{min-height:46px;padding-inline:18px;font-size:15px}
+    .filter-triggers .chip{min-height:52px;padding-inline:24px;font-size:18px;font-weight:700}
     .drawer-wrap{max-width:1160px;margin:-56px auto 0;padding:0 24px;position:relative;z-index:10}.drawer-card{padding:22px}
     .drawer-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}.drawer-title{margin:0;font-size:clamp(24px,4vw,56px);color:var(--ink)} .drawer-sub{margin:8px 0 0;color:var(--muted);font-size:clamp(14px,2vw,20px)}
     .field-grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.field{display:flex;flex-direction:column;gap:6px}.field-label{font-size:12px;color:var(--muted);font-weight:600}
@@ -38,9 +38,33 @@
     .browse-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,59,122,.12),rgba(13,59,122,.62))}
     .browse-label{position:absolute;bottom:10px;right:10px;background:rgba(255,255,255,.95);color:var(--ink);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700}
     .browse-body{padding:14px}
-    @media (max-width:1100px){.result-grid,.browse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-    @media (max-width:900px){.container{padding:0 16px}.hero{padding:64px 0 82px}.search-bar{border-radius:20px}.search-shell{max-width:100%}.drawer-wrap{padding:0 16px}.field-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.result-grid,.browse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media (max-width:600px){.header-row{height:64px}.hero h1{font-size:clamp(28px,9vw,40px)}.hero p{font-size:14px}.search-bar{flex-direction:column;align-items:stretch;border-radius:16px}.search-input{height:44px}.filter-triggers{justify-content:stretch}.filter-triggers .chip{width:100%;justify-content:center}.field-grid-4,.result-grid,.browse-grid{grid-template-columns:1fr}.drawer-card{padding:16px}}
+    .curr-wrap{padding:26px 0 40px}
+    .curr-layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+    .curr-main{min-width:0}
+    .curr-side{padding:14px}
+    .curr-tabs{display:flex;justify-content:center;margin:10px 0 20px}
+    .curr-tabs .tab-box{display:flex;gap:8px;background:#fff;border:1px solid var(--mist);padding:8px;border-radius:10px}
+    .curr-tabs button{height:44px;padding:0 24px;border-radius:8px;border:1px solid var(--mist);background:#fff;color:var(--ink);font-weight:700;cursor:pointer}
+    .curr-tabs button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .type-strip{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:10px;margin-bottom:14px}
+    .type-card{border:1px solid var(--mist);background:#fff;border-radius:16px;padding:10px 6px;text-align:center;font-size:13px;font-weight:600}
+    .crumb{color:var(--blue);font-weight:600;margin:10px 0 14px;font-size:20px}
+    .curr-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .curr-item{padding:12px}
+    .curr-item h4{margin:10px 0 8px;font-size:19px;line-height:1.45;color:var(--ink)}
+    .curr-meta{font-size:14px;color:var(--muted)}
+    .curr-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--mist)}
+    .side-title{font-size:32px;font-weight:700;color:var(--blue);margin:8px 0 14px}
+    .side-group{margin-bottom:14px}
+    .side-group .field-label{display:block;margin-bottom:6px;font-size:20px;color:var(--ink);font-weight:700}
+    .side-group .select{height:44px}
+    .pager{display:flex;justify-content:center;gap:8px;margin-top:20px}
+    .pager span{min-width:36px;height:32px;border-radius:8px;border:1px solid var(--mist);display:grid;place-items:center;background:#fff;color:var(--ink);font-weight:700}
+    .pager span.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+    @media (max-width:1200px){.type-strip{grid-template-columns:repeat(6,minmax(0,1fr))}.curr-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+    @media (max-width:1100px){.result-grid,.browse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.curr-layout{grid-template-columns:1fr}.curr-side{order:-1}.curr-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:900px){.container{padding:0 16px}.hero{padding:64px 0 82px}.search-bar{border-radius:20px}.search-shell{max-width:100%}.drawer-wrap{padding:0 16px}.field-grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}.result-grid,.browse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.type-strip{grid-template-columns:repeat(4,minmax(0,1fr))}}
+    @media (max-width:600px){.header-row{height:64px}.hero h1{font-size:clamp(28px,9vw,40px)}.hero p{font-size:14px}.search-bar{flex-direction:column;align-items:stretch;border-radius:16px}.search-input{height:44px}.filter-triggers{justify-content:stretch}.filter-triggers .chip{width:100%;justify-content:center}.field-grid-4,.result-grid,.browse-grid,.curr-grid{grid-template-columns:1fr}.drawer-card{padding:16px}.type-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body>
@@ -65,6 +89,16 @@
       { t: "اختبار نهاية الدرس", s: "الرياضيات", g: "الثاني المتوسط", c: "السعودية", d: "linear-gradient(160deg,#80C030 0%, #4A7A14 100%)" },
       { t: "ملخص الدرس الأول", s: "اللغة العربية", g: "الخامس", c: "الكويت", d: "linear-gradient(160deg,#F2D096 0%, #C98A2B 100%)" },
     ];
+    const CURRICULUM_RESULTS = [
+      { type: "فيديو تعليمي", title: "حل التناسب (الصف الأول المتوسط)", meta: "8:45", extra: "فيديو تعليمي" },
+      { type: "ملف PDF", title: "أوراق عمل: التناسب والتطبيقات", meta: "2.4 م.ب", extra: "ملف PDF" },
+      { type: "مجموعة صور", title: "صور توضيحية: التناسب في الحياة اليومية", meta: "12 صورة", extra: "مجموعة صور" },
+      { type: "شرائح", title: "عرض تقديمي: مفهوم التناسب", meta: "15 شريحة", extra: "شرائح" },
+      { type: "مجموعة بطاقات", title: "بطاقات تعليمية: مصطلحات التناسب", meta: "20 بطاقة", extra: "بطاقات" },
+      { type: "أسئلة", title: "أسئلة تدريبية على التناسب", meta: "20 سؤال", extra: "مع الحلول" },
+      { type: "اختبار", title: "اختبار قصير: التناسب", meta: "10 أسئلة", extra: "مع الحلول" },
+      { type: "مقال", title: "مقال: أهمية التناسب في الرياضيات", meta: "5 دقائق قراءة", extra: "مقال" }
+    ];
 
     function App(){
       const [query,setQuery]=React.useState("");
@@ -74,11 +108,18 @@
       const [showResults,setShowResults]=React.useState(false);
       const [selectedTypes,setSelectedTypes]=React.useState(new Set());
       const [searchedText,setSearchedText]=React.useState("");
+      const [viewMode,setViewMode]=React.useState("home");
       const hasFilters=topicSelected||currSelected||selectedTypes.size>0||searchedText.trim().length>0;
 
       const toggleType=(k)=>{const n=new Set(selectedTypes);n.has(k)?n.delete(k):n.add(k);setSelectedTypes(n);};
-      const submitSearch=()=>{setSearchedText(query.trim());setShowResults(true);}
-      const applyDrawer=()=>{if(openDrawer==="topic")setTopicSelected(true);if(openDrawer==="curriculum")setCurrSelected(true);setSearchedText(query.trim());setShowResults(true);setOpenDrawer(null);}
+      const submitSearch=()=>{setSearchedText(query.trim());setShowResults(true);setViewMode("home");}
+      const applyDrawer=()=>{
+        if(openDrawer==="topic"){setTopicSelected(true);setViewMode("home");}
+        if(openDrawer==="curriculum"){setCurrSelected(true);setViewMode("curriculum");}
+        setSearchedText(query.trim());
+        setShowResults(true);
+        setOpenDrawer(null);
+      }
 
       return <>
         <header><div className="container header-row">
@@ -95,9 +136,9 @@
               <input className="search-input" value={query} onChange={(e)=>setQuery(e.target.value)} onKeyDown={(e)=>e.key==="Enter"&&submitSearch()} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
             </div>
             <div className="filter-triggers">
-              <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="topic"?null:"topic")}>+ الموضوع / المادة</button>
-              <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>+ الدولة / المنهج</button>
-              <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="type"?null:"type")}>+ نوع المورد</button>
+              <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع / المادة</button>
+              <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>الدولة / المنهج</button>
+              <button className={`chip dark ${openDrawer==="type"?"on":""}`} onClick={()=>setOpenDrawer(openDrawer==="type"?null:"type")}>نوع المصدر</button>
             </div>
           </div>
         </div></section>
@@ -137,7 +178,7 @@
           </div>
         </div></div>}
 
-        {showResults&&hasFilters && <section className="results"><div className="container">
+        {showResults&&hasFilters&&viewMode==="home" && <section className="results"><div className="container">
           <h2 className="display">نتائج البحث: {searchedText||"تم تطبيق المرشحات"}</h2>
           <div className="meta-filters">
             {currSelected&&<span className="chip">السعودية</span>}
@@ -148,6 +189,51 @@
           <div className="result-grid">
             {RESULTS.map((r,i)=><article key={i} className="card"><div className="result-top" style={{background:r.d}}>📘</div><div className="result-body"><div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div><div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div></div></article>)}
           </div>
+        </div></section>}
+
+        {showResults&&hasFilters&&viewMode==="curriculum" && <section className="curr-wrap"><div className="container curr-layout">
+          <div className="curr-main">
+            <div className="curr-tabs">
+              <div className="tab-box">
+                <button className="active">عناصر تعليمية</button>
+                <button>خطط دروس</button>
+              </div>
+            </div>
+            <div className="type-strip">
+              {["كتب","فيديوهات","صور","بطاقات","أسئلة","اختبارات","مقالات","عروض تقديمية","أوراق عمل","إنفوجرافيك","نماذج ثلاثية الأبعاد"].map(t=>(
+                <div className="type-card" key={t}>{t}</div>
+              ))}
+            </div>
+            <div className="crumb">السعودية / التعليم العام / الصف الأول المتوسط / الرياضيات / الفصل الدراسي الأول</div>
+            <div style={{color:"var(--muted)",fontSize:30,fontWeight:700,marginBottom:12}}>306 نتيجة</div>
+            <div className="curr-grid">
+              {CURRICULUM_RESULTS.map((r,i)=>(
+                <article className="card curr-item" key={i}>
+                  <div style={{fontSize:14,color:"var(--muted)"}}>SchooPedia</div>
+                  <h4 className="display">{r.title}</h4>
+                  <div className="curr-meta">{r.meta} • {r.extra}</div>
+                  <div className="curr-actions">
+                    <span style={{color:"var(--muted)"}}>🔖</span>
+                    <button className="btn btn-primary" style={{height:34,padding:"0 16px",fontSize:14}}>تفاصيل</button>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="pager">
+              <span>«</span><span>3</span><span>2</span><span className="active">1</span><span>…</span><span>33</span><span>34</span><span>»</span>
+            </div>
+          </div>
+          <aside className="card curr-side">
+            <div className="side-title">التصفية</div>
+            {["الدرس","النوع","نوع المحتوى","ترخيص المحتوى","مدى ارتباط المنهج","الاستخدام التعليمي"].map(label=>(
+              <div className="side-group" key={label}>
+                <span className="field-label">{label}</span>
+                <div className="select"><span>{label}</span><span>▾</span></div>
+              </div>
+            ))}
+            <button className="btn btn-ghost" style={{width:"100%",marginTop:8}}>إعادة تعيين</button>
+            <button className="btn btn-primary" style={{width:"100%",marginTop:10}}>تطبيق الفلاتر</button>
+          </aside>
         </div></section>}
 
         <section className="browse"><div className="container">
