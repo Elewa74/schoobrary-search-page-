@@ -193,8 +193,6 @@
     .results { padding: 52px 0 24px; }
     .results h2 { margin: 8px 0 0; font-size: clamp(24px,4vw,32px); }
     .meta-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 20px; padding-bottom: 18px; border-bottom: 1px solid var(--mist); }
-    .popular { margin-bottom: 18px; }
-    .popular-title { font-size: 13px; color: var(--muted); margin-bottom: 10px; font-weight: 700; }
     .result-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -285,7 +283,6 @@
       { key: "presentations", label: "عروض", desc: "عروض جاهزة للفصل", count: "+ 440 عرض", img: "https://picsum.photos/seed/presentations/640/360" },
     ];
 
-    const SUGGESTIONS = ["الرياضيات","العلوم","اللغة العربية","اللغة الإنجليزية","الدراسات الإسلامية","الصف الأول المتوسط","فيديوهات تعليمية"];
     const RESULTS = [
       { t: "شرح المعادلات الخطية", s: "الرياضيات", g: "الأول المتوسط", c: "السعودية · الوزارة", d: "linear-gradient(160deg,#0070B0 0%, #0A2740 100%)" },
       { t: "أساسيات العلوم", s: "العلوم", g: "السادس", c: "الإمارات · الوزارة", d: "linear-gradient(160deg,#3FB0B0 0%, #1A6A6A 100%)" },
@@ -323,7 +320,7 @@
         if (openDrawer === "topic") setTopicSelected(true);
         if (openDrawer === "curriculum") {
           setCurrSelected(true);
-          window.location.href = "schoobrary-offline.html";
+          window.location.href = "curriculum.html";
           return;
         }
         setShowResults(true);
@@ -426,16 +423,12 @@
           {showResults && hasFilters && (
             <section className="results">
               <div className="container">
-                <h2 className="display">{query ? `«${query}»` : "أحدث الموارد المضافة"}</h2>
+                <h2 className="display">{query ? `«${query}»` : "نتائج البحث"}</h2>
                 <div className="meta-filters">
                   <span className="chip">السعودية</span>
                   <span className="chip">الوزارة</span>
                   <span className="chip">الأول المتوسط</span>
                   {[...selectedTypes].map((k) => <span className="chip" key={k}>{RTYPES.find(x => x.key===k)?.label}</span>)}
-                </div>
-                <div className="popular">
-                  <div className="popular-title">عمليات بحث شائعة</div>
-                  <div style={{display:"flex",flexWrap:"wrap",gap:"8px"}}>{SUGGESTIONS.map(s => <button key={s} className="chip" onClick={() => setQuery(s)}>{s}</button>)}</div>
                 </div>
                 <div className="result-grid">
                   {RESULTS.map((r,idx) => (
