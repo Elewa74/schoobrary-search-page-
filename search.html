@@ -280,6 +280,17 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+    const BROWSE_TYPES = [
+      { key: "books", label: "كتب", desc: "كتب ومراجع رقمية", count: "+ 1240 كتاب", img: "https://picsum.photos/seed/books/640/360" },
+      { key: "videos", label: "فيديوهات", desc: "شروحات مرئية تعليمية", count: "+ 3200 فيديو", img: "https://picsum.photos/seed/videos/640/360" },
+      { key: "questions", label: "أسئلة", desc: "أسئلة وتدريبات تفاعلية", count: "+ 8500 سؤال", img: "https://picsum.photos/seed/questions/640/360" },
+      { key: "cards", label: "بطاقات", desc: "ملخصات وبطاقات مراجعة", count: "+ 1700 بطاقة", img: "https://picsum.photos/seed/cards/640/360" },
+      { key: "images", label: "صور", desc: "بنك الصور التعليمية", count: "+ 4200 صورة", img: "https://picsum.photos/seed/images/640/360" },
+      { key: "tests", label: "اختبارات", desc: "اختبارات تفاعلية مصححة", count: "+ 620 اختبار", img: "https://picsum.photos/seed/tests/640/360" },
+      { key: "articles", label: "مقالات", desc: "مقالات وتقارير علمية", count: "+ 900 مقال", img: "https://picsum.photos/seed/articles/640/360" },
+      { key: "presentations", label: "عروض", desc: "عروض جاهزة للفصل", count: "+ 440 عرض", img: "https://picsum.photos/seed/presentations/640/360" },
+    ];
+
     const RESULTS = [
       { t: "شرح المعادلات الخطية", s: "الرياضيات", g: "الأول المتوسط", c: "السعودية · الوزارة", d: "linear-gradient(160deg,#0070B0 0%, #0A2740 100%)" },
       { t: "أساسيات العلوم", s: "العلوم", g: "السادس", c: "الإمارات · الوزارة", d: "linear-gradient(160deg,#3FB0B0 0%, #1A6A6A 100%)" },
@@ -292,13 +303,20 @@
       const [topicSelected, setTopicSelected] = React.useState(false);
       const [currSelected, setCurrSelected] = React.useState(false);
       const [showResults, setShowResults] = React.useState(false);
+      const [showCurriculumInline, setShowCurriculumInline] = React.useState(false);
 
       const hasFilters = topicSelected || currSelected || query.trim().length > 0;
 
       const applyDrawer = () => {
         if (openDrawer === "topic") setTopicSelected(true);
-        if (openDrawer === "curriculum") setCurrSelected(true);
-        setShowResults(true);
+        if (openDrawer === "curriculum") {
+          setCurrSelected(true);
+          setShowCurriculumInline(true);
+          setShowResults(false);
+        } else {
+          setShowCurriculumInline(false);
+          setShowResults(true);
+        }
         setOpenDrawer(null);
       };
 
@@ -323,7 +341,7 @@
               <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
               <div className="search-shell">
                 <div className="search-bar">
-                  <button className="btn btn-primary" onClick={() => setShowResults(true)}>بحث</button>
+                  <button className="btn btn-primary" onClick={() => { setShowCurriculumInline(false); setShowResults(true); }}>بحث</button>
                   <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
@@ -381,10 +399,60 @@
             </div>
           )}
 
-          {showResults && (
+          {!showCurriculumInline && (
+            <section className="browse">
+              <div className="container">
+                <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>تصفح الموارد حسب النوع</h2>
+                <div className="browse-grid">
+                  {BROWSE_TYPES.map((r) => (
+                    <article key={r.key} className="card">
+                      <div className="browse-media">
+                        <img src={r.img} alt={r.label} />
+                        <div className="browse-overlay"></div>
+                        <div className="browse-label">{r.label}</div>
+                      </div>
+                      <div className="browse-body">
+                        <div style={{fontSize:13,color:"var(--muted)",lineHeight:1.6}}>{r.desc}</div>
+                        <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid var(--mist)",display:"flex",justifyContent:"space-between"}}>
+                          <span style={{fontSize:12,color:"var(--muted)"}}>{r.count}</span>
+                          <span style={{fontSize:13,color:"var(--blue)",fontWeight:700}}>استعراض</span>
+                        </div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {showCurriculumInline && (
             <section className="results">
               <div className="container">
                 <iframe className="curriculum-inline" src="curriculum.html" title="نتائج المنهج"></iframe>
+              </div>
+            </section>
+          )}
+
+          {showResults && !showCurriculumInline && (
+            <section className="results">
+              <div className="container">
+                <h2 className="display">{query ? `«${query}»` : "نتائج البحث"}</h2>
+                <div className="meta-filters">
+                  <span className="chip">السعودية</span>
+                  <span className="chip">الوزارة</span>
+                  <span className="chip">الأول المتوسط</span>
+                </div>
+                <div className="result-grid">
+                  {RESULTS.map((r,idx) => (
+                    <article key={idx} className="card">
+                      <div className="result-top" style={{background:r.d}}>📘</div>
+                      <div className="result-body">
+                        <div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div>
+                        <div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div>
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
             </section>
           )}
