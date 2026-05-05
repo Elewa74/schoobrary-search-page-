@@ -152,13 +152,22 @@
       font-family: inherit;
     }
     .filter-triggers {
-      margin-top: 16px;
+      margin-top: 18px;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 14px;
       justify-content: center;
     }
-    .filter-triggers .chip { min-height: 46px; padding-inline: 18px; font-size: 15px; }
+    .filter-triggers .chip {
+      min-width: 112px;
+      min-height: 56px;
+      padding-inline: 26px;
+      font-size: 18px;
+      font-weight: 800;
+      border-width: 1.5px;
+      justify-content: center;
+      text-align: center;
+    }
 
     .drawer-wrap {
       max-width: 1160px;
@@ -192,6 +201,22 @@
 
     .results { padding: 52px 0 24px; }
     .results h2 { margin: 8px 0 0; font-size: clamp(24px,4vw,32px); }
+    .results-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      margin: 0 0 16px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(36,54,75,.08);
+    }
+    .results-count strong { color: var(--blue); font-size: 16px; }
     .meta-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 20px; padding-bottom: 18px; border-bottom: 1px solid var(--mist); }
     .result-grid {
       display: grid;
@@ -271,10 +296,27 @@
         flex-direction: column;
         align-items: stretch;
         border-radius: 16px;
+        padding: 8px;
       }
-      .search-input { height: 44px; }
+      .search-input {
+        order: 1;
+        height: 44px;
+        padding-inline: 8px;
+      }
+      .search-bar .btn-primary {
+        order: 2;
+        align-self: stretch;
+        height: 44px;
+        justify-content: center;
+        padding-inline: 16px;
+        font-size: 14px;
+      }
       .filter-triggers { justify-content: stretch; }
-      .filter-triggers .chip { width: 100%; justify-content: center; }
+      .filter-triggers .chip {
+        width: 100%;
+        min-height: 52px;
+        justify-content: center;
+      }
       .field-grid-4, .field-grid-5 { grid-template-columns: 1fr; }
       .result-grid, .browse-grid { grid-template-columns: 1fr; }
       .drawer-card { padding: 16px; }
@@ -360,8 +402,8 @@
                   <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
-                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>الموضوع</button>
-                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>المنهج</button>
+                  <button className={`chip dark ${openDrawer==="topic"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="topic"?null:"topic")}>بحث بالموضوع</button>
+                  <button className={`chip dark ${openDrawer==="curriculum"?"on":""}`} onClick={() => setOpenDrawer(openDrawer==="curriculum"?null:"curriculum")}>بحث بالمنهج</button>
                 </div>
               </div>
             </div>
@@ -443,6 +485,7 @@
           {showCurriculumInline && (
             <section className="results">
               <div className="container">
+                <div className="results-count">عدد نتائج البحث <strong>306</strong> نتيجة</div>
                 <iframe className="curriculum-inline" src="curriculum.html" title="نتائج المنهج"></iframe>
               </div>
             </section>
@@ -451,6 +494,7 @@
           {showTopicInline && (
             <section className="results">
               <div className="container">
+                <div className="results-count">عدد نتائج البحث <strong>3</strong> نتائج</div>
                 <iframe className="topic-inline" src="topic-material.html" title="نتائج الموضوع أو المادة"></iframe>
               </div>
             </section>
@@ -460,6 +504,7 @@
             <section className="results">
               <div className="container">
                 <h2 className="display">{query ? `«${query}»` : "نتائج البحث"}</h2>
+                <div className="results-count">عدد نتائج البحث <strong>{RESULTS.length}</strong> نتائج</div>
                 <div className="meta-filters">
                   <span className="chip">السعودية</span>
                   <span className="chip">الوزارة</span>
