@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schoobrary Search - Single Page</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #24364b;
+      --muted: #6b7c8f;
+      --bone: #f8fbff;
+      --paper: #ffffff;
+      --blue: #2196f3;
+      --blue-2: #3a7bd5;
+      --green: #3a9d5d;
+      --orange: #f26a2e;
+      --border: #d8e6f5;
+      --soft: #eef5ff;
+      --shadow: 0 14px 38px rgba(36,54,75,.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bone);
+      color: var(--ink);
+      font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+    }
+    button, input, select { font: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248,251,255,.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .header-row {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .logo { height: 40px; width: auto; }
+    .user-box { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue-2), var(--green));
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .hero {
+      background: radial-gradient(circle at 86% 18%, rgba(84,181,63,.16), transparent 34%), linear-gradient(135deg, #0d3b7a, #3a7bd5, #3a9d5d);
+      color: #fff;
+      padding: 78px 0 98px;
+      overflow: hidden;
+    }
+    .hero h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 1.1;
+      font-weight: 800;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 16px auto 0;
+      text-align: center;
+      color: rgba(255,255,255,.86);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .search-shell { max-width: 900px; margin: 34px auto 0; }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 30px 80px rgba(13,34,64,.35);
+    }
+    .search-input {
+      flex: 1;
+      height: 50px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      text-align: right;
+      font-size: 15px;
+      padding: 0 14px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: var(--blue);
+      border: 1px solid var(--border);
+    }
+    .filter-triggers {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .filter-trigger {
+      min-width: 136px;
+      min-height: 56px;
+      padding: 0 28px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+    .filter-trigger.active { background: var(--orange); border-color: var(--orange); }
+
+    .drawer-wrap {
+      max-width: 1160px;
+      margin: -56px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+    .drawer-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .drawer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .drawer-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 800;
+    }
+    .drawer-sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 20px);
+    }
+    .field-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .field select {
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--ink);
+      padding: 0 12px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7c8f' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+    }
+    .drawer-actions {
+      display: flex;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    .browse { padding: 54px 0 80px; }
+    .section-title {
+      margin: 0 0 18px;
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+    }
+    .browse-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .browse-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .browse-media {
+      position: relative;
+      height: 130px;
+      overflow: hidden;
+      background: #dde9f8;
+    }
+    .browse-media img { width: 100%; height: 100%; object-fit: cover; opacity: .82; }
+    .browse-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13,59,122,.12), rgba(13,59,122,.62));
+    }
+    .browse-label {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      background: rgba(255,255,255,.95);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .browse-body { padding: 14px; }
+    .browse-footer {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .browse-footer a { color: var(--blue); font-weight: 800; text-decoration: none; }
+
+    .results {
+      padding: 52px 0 70px;
+      background: #f5f7fa;
+    }
+    .results-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .results-count {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 8px 22px rgba(36,54,75,.08);
+    }
+    .results-count strong { color: var(--blue); font-size: 16px; }
+    .results-layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .sidebar-box {
+      background: #fff;
+      border: 1px solid #e8ecf0;
+      border-radius: 14px;
+      padding: 24px 20px;
+    }
+    .sidebar-title {
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .filter-group { margin-bottom: 16px; }
+    .filter-label {
+      color: #555;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .filter-select {
+      width: 100%;
+      padding: 10px 14px;
+      padding-left: 32px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      color: #555;
+      background: #fff;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .resource-card {
+      background: #fff;
+      border: 1px solid #e8ecf0;
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all .2s;
+    }
+    .resource-card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }
+    .card-thumb {
+      position: relative;
+      height: 160px;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+    .card-thumb-bg {
+      position: absolute;
+      inset: 0;
+      opacity: .12;
+    }
+    .card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      z-index: 2;
+    }
+    .card-thumb-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      text-align: center;
+      padding: 14px;
+    }
+    .card-type {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.5;
+    }
+    .card-type-sub { color: #888; font-size: 11px; }
+    .card-body {
+      padding: 14px 16px;
+      display: grid;
+      gap: 8px;
+    }
+    .card-title {
+      min-height: 42px;
+      color: #333;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.7;
+    }
+    .card-meta {
+      color: #999;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+    .card-actions {
+      margin-top: auto;
+      padding: 10px 16px 14px;
+      border-top: 1px solid #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-actions-right { display: flex; align-items: center; gap: 6px; }
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      color: #888;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+    }
+    .details-btn {
+      min-height: 30px;
+      padding: 0 14px;
+      border: 0;
+      border-radius: 6px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1100px) {
+      .browse-grid, .cards-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+      .field-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .container { padding: 0 16px; }
+      .hero { padding: 64px 0 82px; }
+      .results-layout { grid-template-columns: 1fr; }
+      .browse-grid, .cards-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .header-row { height: 64px; }
+      .hero h1 { font-size: clamp(28px, 9vw, 40px); }
+      .hero p { font-size: 14px; }
+      .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 16px;
+        padding: 8px;
+      }
+      .search-input {
+        order: 1;
+        height: 44px;
+        padding-inline: 8px;
+      }
+      .search-bar .btn-primary {
+        order: 2;
+        align-self: stretch;
+        min-height: 42px;
+        padding-inline: 16px;
+        font-size: 14px;
+      }
+      .filter-trigger {
+        width: 100%;
+        min-height: 52px;
+      }
+      .field-grid, .browse-grid, .cards-grid { grid-template-columns: 1fr; }
+      .drawer-card { padding: 16px; }
+      .results-head { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const icon = {
+      eye: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>,
+      bookmark: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>,
+      filter: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>,
+      reset: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>,
+      play: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+    };
+
+    const BROWSE_TYPES = [
+      { key: "books", label: "كتب", desc: "كتب ومراجع رقمية", count: "+ 1240 كتاب", img: "https://picsum.photos/seed/books/640/360" },
+      { key: "videos", label: "فيديوهات", desc: "شروحات مرئية تعليمية", count: "+ 3200 فيديو", img: "https://picsum.photos/seed/videos/640/360" },
+      { key: "questions", label: "أسئلة", desc: "أسئلة وتدريبات تفاعلية", count: "+ 8500 سؤال", img: "https://picsum.photos/seed/questions/640/360" },
+      { key: "cards", label: "بطاقات", desc: "ملخصات وبطاقات مراجعة", count: "+ 1700 بطاقة", img: "https://picsum.photos/seed/cards/640/360" },
+      { key: "images", label: "صور", desc: "بنك الصور التعليمية", count: "+ 4200 صورة", img: "https://picsum.photos/seed/images/640/360" },
+      { key: "tests", label: "اختبارات", desc: "اختبارات تفاعلية مصححة", count: "+ 620 اختبار", img: "https://picsum.photos/seed/tests/640/360" },
+      { key: "articles", label: "مقالات", desc: "مقالات وتقارير علمية", count: "+ 900 مقال", img: "https://picsum.photos/seed/articles/640/360" },
+      { key: "presentations", label: "عروض", desc: "عروض جاهزة للفصل", count: "+ 440 عرض", img: "https://picsum.photos/seed/presentations/640/360" }
+    ];
+
+    const curriculumCards = [
+      { title: "حل التناسبات (الصف الأول المتوسط)", type: "شرح خارجي", typeSub: "External Learning Resources", meta1: "فيديو تعليمي", meta2: "8:45", bg: "#E3F2FD", accent: "#2196F3", badge: "play" },
+      { title: "أوراق عمل: التناسب والتطبيقات", type: "أوراق عمل", typeSub: "Worksheets", meta1: "ملف PDF", meta2: "2.4 م.ب", bg: "#F3E5F5", accent: "#9C27B0", badge: "file" },
+      { title: "صور توضيحية: التناسب في الحياة اليومية", type: "صور تعليمية", typeSub: "Educational Images", meta1: "مجموعة صور", meta2: "12 صورة", bg: "#E8F5E9", accent: "#4CAF50", badge: "image" },
+      { title: "عرض تقديمي: مفهوم التناسب", type: "عرض تقديمي", typeSub: "Presentation", meta1: "شرائح", meta2: "15 شريحة", bg: "#FFF3E0", accent: "#FF9800", badge: "screen" },
+      { title: "بطاقات تعليمية: مصطلحات التناسب", type: "بطاقات تعليمية", typeSub: "Flashcards", meta1: "مجموعة بطاقات", meta2: "20 بطاقة", bg: "#FFFDE7", accent: "#FFC107", badge: "card" },
+      { title: "أسئلة تدريبية على التناسب", type: "أسئلة تدريبية", typeSub: "Practice Questions", meta1: "20 سؤال", meta2: "مع الحلول", bg: "#E0F2F1", accent: "#009688", badge: "question" },
+      { title: "اختبار قصير: التناسب", type: "اختبار قصير", typeSub: "Quick Quiz", meta1: "10 أسئلة", meta2: "مع الحلول", bg: "#E3F2FD", accent: "#2196F3", badge: "check" },
+      { title: "مقال: أهمية التناسب في الرياضيات", type: "مقال تعليمي", typeSub: "Educational Article", meta1: "مقال", meta2: "5 دقائق قراءة", bg: "#FFF3E0", accent: "#FF9800", badge: "edit" }
+    ];
+
+    const topicCards = [
+      { title: "المقارنة بين خواص المحاليل المنظمة والمحاليل غير المنظمة.", type: "المقارنة بين خواص المحاليل المنظمة وغير المنظمة", typeSub: "Learning Object", meta1: "فيديو تعليمي", meta2: "الجزء الثالث", bg: "#E3F2FD", accent: "#2196F3", badge: "play" },
+      { title: "استعمال تفاعلات التعادل في معايرة الأحماض والقواعد.", type: "استعمال تفاعلات التعادل في معايرة الأحماض والقواعد", typeSub: "Learning Object", meta1: "فيديو تعليمي", meta2: "الجزء الثاني", bg: "#E0F2F1", accent: "#009688", badge: "play" },
+      { title: "معادلات كيميائية لتفاعلات التعادل", type: "يكتب معادلات كيميائية لتفاعلات التعادل", typeSub: "Learning Object", meta1: "فيديو تعليمي", meta2: "الجزء الأول", bg: "#FFF3E0", accent: "#FF9800", badge: "play" }
+    ];
+
+    const generalCards = [
+      { title: "شرح المعادلات الخطية", type: "درس رياضيات", typeSub: "Video Lesson", meta1: "الأول المتوسط", meta2: "السعودية", bg: "#E3F2FD", accent: "#2196F3", badge: "play" },
+      { title: "أساسيات العلوم", type: "ملخص تعليمي", typeSub: "Summary", meta1: "السادس", meta2: "الإمارات", bg: "#E8F5E9", accent: "#4CAF50", badge: "file" },
+      { title: "اختبار نهاية الدرس", type: "اختبار قصير", typeSub: "Quick Quiz", meta1: "الثاني المتوسط", meta2: "السعودية", bg: "#FFFDE7", accent: "#FFC107", badge: "check" },
+      { title: "ملخص الدرس الأول", type: "بطاقة مراجعة", typeSub: "Flashcard", meta1: "الخامس", meta2: "الكويت", bg: "#F3E5F5", accent: "#9C27B0", badge: "card" }
+    ];
+
+    const ApiService = {
+      async search(payload) {
+        const mode = payload.mode || "general";
+        const data = {
+          general: { count: generalCards.length, items: generalCards, filters: [] },
+          curriculum: {
+            count: 306,
+            items: curriculumCards,
+            filters: [
+              ["الدرس", "الدرس"],
+              ["النوع", "النوع"],
+              ["ترخيص المحتوى", "ترخيص المحتوى"],
+              ["مدى ارتباط المنهج", "مدى ارتباط المنهج"],
+              ["الاستخدام التعليمي", "الاستخدام التعليمي"]
+            ]
+          },
+          topic: {
+            count: 3,
+            items: topicCards,
+            filters: [
+              ["المجالات", "الأحماض والقواعد (3)"],
+              ["المحاور", "الماء ومقياس الأس الهيدروجيني (3)"],
+              ["الموضوع الفرعي", "التعادل (3)"],
+              ["الدرس", "الدرس"],
+              ["النوع", "النوع"],
+              ["ترخيص المحتوى", "ترخيص المحتوى"],
+              ["مدى ارتباط المنهج", "مدى ارتباط المنهج"],
+              ["الاستخدام التعليمي", "الاستخدام التعليمي"]
+            ]
+          }
+        };
+        return new Promise(resolve => setTimeout(() => resolve(data[mode]), 120));
+      }
+    };
+
+    function badgeIcon(type) {
+      const stroke = "#fff";
+      const base = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke, strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round" };
+      const map = {
+        play: <svg {...base}><polygon points="5 3 19 12 5 21 5 3"/></svg>,
+        file: <svg {...base}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>,
+        image: <svg {...base}><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>,
+        screen: <svg {...base}><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>,
+        card: <svg {...base}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 8v4l3 2"/></svg>,
+        question: <svg {...base}><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>,
+        check: <svg {...base}><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>,
+        edit: <svg {...base}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      };
+      return map[type] || map.file;
+    }
+
+    function DecoSvg({ accent }) {
+      const light = `${accent}30`;
+      return (
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <circle cx="250" cy="20" r="40" fill={light}/>
+          <circle cx="40" cy="140" r="30" fill={light}/>
+          <polygon points="20,30 35,5 50,30" fill={accent} opacity="0.15"/>
+          <polygon points="260,140 275,115 290,140" fill={accent} opacity="0.15"/>
+          <rect x="140" y="10" width="8" height="8" rx="2" fill={accent} opacity="0.2" transform="rotate(20 144 14)"/>
+          <circle cx="180" cy="140" r="4" fill={accent} opacity="0.2"/>
+        </svg>
+      );
+    }
+
+    function AppHeader() {
+      return (
+        <header className="app-header">
+          <div className="container header-row">
+            <img className="logo" src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary" />
+            <div className="user-box">
+              <div className="avatar">ME</div>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 14 }}>Moamen Elewa</div>
+                <div style={{ fontSize: 11, color: "var(--muted)" }}>حسابي</div>
+              </div>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    function SearchHero({ query, setQuery, activeDrawer, setActiveDrawer, onGeneralSearch }) {
+      return (
+        <section className="hero">
+          <div className="container">
+            <h1>ابحث في سكوبراري</h1>
+            <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
+            <div className="search-shell">
+              <div className="search-bar">
+                <button className="btn btn-primary" onClick={onGeneralSearch}>بحث</button>
+                <input className="search-input" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
+              </div>
+              <div className="filter-triggers">
+                <button className={`filter-trigger ${activeDrawer === "topic" ? "active" : ""}`} onClick={() => setActiveDrawer(activeDrawer === "topic" ? null : "topic")}>بحث بالموضوع</button>
+                <button className={`filter-trigger ${activeDrawer === "curriculum" ? "active" : ""}`} onClick={() => setActiveDrawer(activeDrawer === "curriculum" ? null : "curriculum")}>بحث بالمنهج</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function SearchFilters({ type, onApply, onClose }) {
+      const isTopic = type === "topic";
+      const fields = isTopic
+        ? [["الموضوع الرئيسي", "الجبر"], ["المجال", "اختر..."], ["المحور", "اختر..."], ["الموضوع الفرعي", "اختر..."]]
+        : [["الدولة", "السعودية"], ["المنهج", "وزارة التعليم"], ["الصف الدراسي", "الأول المتوسط"], ["المادة", "الرياضيات"]];
+      return (
+        <div className="drawer-wrap">
+          <div className="drawer-card">
+            <div className="drawer-head">
+              <div>
+                <h2 className="drawer-title">{isTopic ? "الموضوع أو المادة" : "الدولة / المنهج"}</h2>
+                <p className="drawer-sub">{isTopic ? "حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به." : "اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}</p>
+              </div>
+              <button className="btn btn-outline" onClick={onClose}>إغلاق</button>
+            </div>
+            <div className="field-grid">
+              {fields.map(([label, value]) => (
+                <div className="field" key={label}>
+                  <label>{label}</label>
+                  <select defaultValue={value}>
+                    <option>{value}</option>
+                  </select>
+                </div>
+              ))}
+            </div>
+            <div className="drawer-actions">
+              <button className="btn btn-orange" onClick={() => onApply(type)}>بحث</button>
+              <button className="btn btn-outline">إعادة تعيين</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function ResourceTypeBrowse() {
+      return (
+        <section className="browse">
+          <div className="container">
+            <h2 className="section-title">تصفح الموارد حسب النوع</h2>
+            <div className="browse-grid">
+              {BROWSE_TYPES.map(item => (
+                <article className="browse-card" key={item.key}>
+                  <div className="browse-media">
+                    <img src={item.img} alt={item.label} />
+                    <div className="browse-overlay"></div>
+                    <div className="browse-label">{item.label}</div>
+                  </div>
+                  <div className="browse-body">
+                    <div style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.7 }}>{item.desc}</div>
+                    <div className="browse-footer">
+                      <span>{item.count}</span>
+                      <a href="#">استعراض</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function ResultsSidebar({ filters }) {
+      if (!filters || filters.length === 0) return null;
+      return (
+        <aside className="sidebar-box">
+          <div className="sidebar-title">التصفية</div>
+          {filters.map(([label, value]) => (
+            <div className="filter-group" key={label}>
+              <div className="filter-label">{label}</div>
+              <select className="filter-select" defaultValue={value}>
+                <option>{value}</option>
+              </select>
+            </div>
+          ))}
+          <button className="btn-reset btn btn-outline" style={{ width: "100%", marginBottom: 10 }}>{icon.reset} إعادة تعيين</button>
+          <button className="btn-apply btn btn-primary" style={{ width: "100%" }}>{icon.filter} بحث</button>
+        </aside>
+      );
+    }
+
+    function ResourceCard({ item }) {
+      return (
+        <article className="resource-card">
+          <div className="card-thumb" style={{ background: item.bg }}>
+            <div className="card-thumb-bg"><DecoSvg accent={item.accent} /></div>
+            <div className="card-badge" style={{ background: item.accent }}>{badgeIcon(item.badge)}</div>
+            <div className="card-thumb-content">
+              <div className="card-type" style={{ color: item.accent }}>{item.type}</div>
+              <div className="card-type-sub">{item.typeSub}</div>
+            </div>
+          </div>
+          <div className="card-body">
+            <div className="card-title">{item.title}</div>
+            <div className="card-meta"><span>{item.meta1}</span><span className="dot"></span><span>{item.meta2}</span></div>
+          </div>
+          <div className="card-actions">
+            <button className="icon-btn">{icon.bookmark}</button>
+            <div className="card-actions-right">
+              <button className="icon-btn">{icon.eye}</button>
+              <button className="details-btn">تفاصيل</button>
+            </div>
+          </div>
+        </article>
+      );
+    }
+
+    function SearchResults({ mode, result }) {
+      const title = mode === "topic" ? "نتائج البحث بالموضوع" : mode === "curriculum" ? "نتائج البحث بالمنهج" : "نتائج البحث";
+      return (
+        <section className="results">
+          <div className="container">
+            <div className="results-head">
+              <h2 className="section-title" style={{ margin: 0 }}>{title}</h2>
+              <div className="results-count">عدد نتائج البحث <strong>{result.count}</strong> {result.count === 1 ? "نتيجة" : "نتائج"}</div>
+            </div>
+            <div className={result.filters.length ? "results-layout" : ""}>
+              <ResultsSidebar filters={result.filters} />
+              <div className="cards-grid">
+                {result.items.map((item, index) => <ResourceCard item={item} key={`${item.title}-${index}`} />)}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function App() {
+      const [query, setQuery] = React.useState("");
+      const [activeDrawer, setActiveDrawer] = React.useState(null);
+      const [mode, setMode] = React.useState(null);
+      const [result, setResult] = React.useState(null);
+      const [loading, setLoading] = React.useState(false);
+
+      async function runSearch(nextMode) {
+        setLoading(true);
+        const data = await ApiService.search({ mode: nextMode, query });
+        setMode(nextMode);
+        setResult(data);
+        setActiveDrawer(null);
+        setLoading(false);
+      }
+
+      return (
+        <>
+          <AppHeader />
+          <SearchHero query={query} setQuery={setQuery} activeDrawer={activeDrawer} setActiveDrawer={setActiveDrawer} onGeneralSearch={() => runSearch("general")} />
+          {activeDrawer && <SearchFilters type={activeDrawer} onApply={runSearch} onClose={() => setActiveDrawer(null)} />}
+          {!result && <ResourceTypeBrowse />}
+          {loading && <section className="results"><div className="container"><div className="results-count">جاري تحميل النتائج...</div></div></section>}
+          {result && !loading && <SearchResults mode={mode} result={result} />}
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
