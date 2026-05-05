@@ -216,6 +216,14 @@
       background: #f5f7fa;
       box-shadow: var(--shadow-md);
     }
+    .topic-inline {
+      width: 100%;
+      min-height: 1120px;
+      border: 0;
+      border-radius: 16px;
+      background: #f5f7fa;
+      box-shadow: var(--shadow-md);
+    }
 
     .browse { padding: 50px 0 80px; }
     .browse-grid {
@@ -304,17 +312,24 @@
       const [currSelected, setCurrSelected] = React.useState(false);
       const [showResults, setShowResults] = React.useState(false);
       const [showCurriculumInline, setShowCurriculumInline] = React.useState(false);
+      const [showTopicInline, setShowTopicInline] = React.useState(false);
 
       const hasFilters = topicSelected || currSelected || query.trim().length > 0;
 
       const applyDrawer = () => {
-        if (openDrawer === "topic") setTopicSelected(true);
-        if (openDrawer === "curriculum") {
+        if (openDrawer === "topic") {
+          setTopicSelected(true);
+          setShowTopicInline(true);
+          setShowCurriculumInline(false);
+          setShowResults(false);
+        } else if (openDrawer === "curriculum") {
           setCurrSelected(true);
           setShowCurriculumInline(true);
+          setShowTopicInline(false);
           setShowResults(false);
         } else {
           setShowCurriculumInline(false);
+          setShowTopicInline(false);
           setShowResults(true);
         }
         setOpenDrawer(null);
@@ -341,7 +356,7 @@
               <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
               <div className="search-shell">
                 <div className="search-bar">
-                  <button className="btn btn-primary" onClick={() => { setShowCurriculumInline(false); setShowResults(true); }}>بحث</button>
+                  <button className="btn btn-primary" onClick={() => { setShowCurriculumInline(false); setShowTopicInline(false); setShowResults(true); }}>بحث</button>
                   <input className="search-input" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
                 </div>
                 <div className="filter-triggers">
@@ -399,7 +414,7 @@
             </div>
           )}
 
-          {!showCurriculumInline && (
+          {!showCurriculumInline && !showTopicInline && (
             <section className="browse">
               <div className="container">
                 <h2 className="display" style={{fontSize:"clamp(24px,4vw,36px)",margin:"0 0 14px"}}>تصفح الموارد حسب النوع</h2>
@@ -433,7 +448,15 @@
             </section>
           )}
 
-          {showResults && !showCurriculumInline && (
+          {showTopicInline && (
+            <section className="results">
+              <div className="container">
+                <iframe className="topic-inline" src="topic-material.html" title="نتائج الموضوع أو المادة"></iframe>
+              </div>
+            </section>
+          )}
+
+          {showResults && !showCurriculumInline && !showTopicInline && (
             <section className="results">
               <div className="container">
                 <h2 className="display">{query ? `«${query}»` : "نتائج البحث"}</h2>
