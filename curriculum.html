@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Schoobrary - المكتبة التعليمية</title>
+<title>Schoobrary - Ø§Ù„Ù…ÙƒØªØ¨Ø© Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</title>
 <link rel="icon" type="image/png" href="assets/logo.png">
 <!-- Offline: uses Cairo if installed locally, otherwise falls back to system Arabic fonts -->
 <style>
@@ -674,68 +674,60 @@
 <!-- TABS -->
 <div class="tabs-container">
   <div class="tabs">
-    <button class="tab active">عناصر تعليمية</button>
-    <button class="tab">خطط دروس</button>
+    <button class="tab active">Ø¹Ù†Ø§ØµØ± ØªØ¹Ù„ÙŠÙ…ÙŠØ©</button>
+    <button class="tab">Ø®Ø·Ø· Ø¯Ø±ÙˆØ³</button>
   </div>
 </div>
 
 <!-- TAB PAGES -->
-<!-- PAGE 1: عناصر تعليمية -->
+<!-- PAGE 1: Ø¹Ù†Ø§ØµØ± ØªØ¹Ù„ÙŠÙ…ÙŠØ© -->
 <div class="main-layout tab-page active" id="tabElements">
   <!-- SIDEBAR (right side in RTL) -->
   <div class="sidebar">
     <div class="sidebar-box">
-      <div class="sidebar-title">التصفية</div>
+      <div class="sidebar-title">Ø§Ù„ØªØµÙÙŠØ©</div>
 
       <div class="filter-group">
-        <div class="filter-label">الدرس</div>
+        <div class="filter-label">Ø§Ù„Ø¯Ø±Ø³</div>
         <select class="filter-select">
-          <option>الدرس</option>
+          <option>Ø§Ù„Ø¯Ø±Ø³</option>
         </select>
       </div>
 
       <div class="filter-group">
-        <div class="filter-label">النوع</div>
+        <div class="filter-label">Ø§Ù„Ù†ÙˆØ¹</div>
         <select class="filter-select">
-          <option>النوع</option>
+          <option>Ø§Ù„Ù†ÙˆØ¹</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">ØªØ±Ø®ÙŠØµ Ø§Ù„Ù…Ø­ØªÙˆÙ‰</div>
+        <select class="filter-select">
+          <option>ØªØ±Ø®ÙŠØµ Ø§Ù„Ù…Ø­ØªÙˆÙ‰</option>
         </select>
       </div>
 
       <div class="filter-group">
-        <div class="filter-label">نوع المحتوى</div>
+        <div class="filter-label">Ù…Ø¯Ù‰ Ø§Ø±ØªØ¨Ø§Ø· Ø§Ù„Ù…Ù†Ù‡Ø¬</div>
         <select class="filter-select">
-          <option>نوع المحتوى</option>
+          <option>Ù…Ø¯Ù‰ Ø§Ø±ØªØ¨Ø§Ø· Ø§Ù„Ù…Ù†Ù‡Ø¬</option>
         </select>
       </div>
 
       <div class="filter-group">
-        <div class="filter-label">ترخيص المحتوى</div>
+        <div class="filter-label">Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠ</div>
         <select class="filter-select">
-          <option>ترخيص المحتوى</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-label">مدى ارتباط المنهج</div>
-        <select class="filter-select">
-          <option>مدى ارتباط المنهج</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-label">الاستخدام التعليمي</div>
-        <select class="filter-select">
-          <option>الاستخدام التعليمي</option>
+          <option>Ø§Ù„Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠ</option>
         </select>
       </div>
 
       <button class="btn-reset">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-        إعادة تعيين
+        Ø¥Ø¹Ø§Ø¯Ø© ØªØ¹ÙŠÙŠÙ†
       </button>
       <button class="btn-apply">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
-        تطبيق الفلاتر
+        ØªØ·Ø¨ÙŠÙ‚ Ø§Ù„ÙÙ„Ø§ØªØ±
       </button>
     </div>
   </div>
@@ -744,7 +736,7 @@
   <div class="content-area">
     <!-- Content Type Header -->
     <div class="content-type-header">
-      <span>نوع المحتوى</span>
+      <span>Ù†ÙˆØ¹ Ø§Ù„Ù…Ø­ØªÙˆÙ‰</span>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
         <polyline points="22 4 12 14.01 9 11.01"/>
@@ -757,82 +749,82 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
       <div class="carousel">
-        <!-- كتب -->
+        <!-- ÙƒØªØ¨ -->
         <div class="carousel-item">
           <div class="icon-box bg-blue-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
           </div>
-          <span>كتب</span>
+          <span>ÙƒØªØ¨</span>
         </div>
-        <!-- فيديوهات -->
+        <!-- ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª -->
         <div class="carousel-item">
           <div class="icon-box bg-red-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#F44336" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
           </div>
-          <span>فيديوهات</span>
+          <span>ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª</span>
         </div>
-        <!-- صور -->
+        <!-- ØµÙˆØ± -->
         <div class="carousel-item">
           <div class="icon-box bg-green-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           </div>
-          <span>صور</span>
+          <span>ØµÙˆØ±</span>
         </div>
-        <!-- بطاقات -->
+        <!-- Ø¨Ø·Ø§Ù‚Ø§Øª -->
         <div class="carousel-item">
           <div class="icon-box bg-purple-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#9C27B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
-          <span>بطاقات</span>
+          <span>Ø¨Ø·Ø§Ù‚Ø§Øª</span>
         </div>
-        <!-- أسئلة -->
+        <!-- Ø£Ø³Ø¦Ù„Ø© -->
         <div class="carousel-item">
           <div class="icon-box bg-teal-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <span>أسئلة</span>
+          <span>Ø£Ø³Ø¦Ù„Ø©</span>
         </div>
-        <!-- اختبارات -->
+        <!-- Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª -->
         <div class="carousel-item">
           <div class="icon-box bg-blue-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </div>
-          <span>اختبارات</span>
+          <span>Ø§Ø®ØªØ¨Ø§Ø±Ø§Øª</span>
         </div>
-        <!-- مقالات -->
+        <!-- Ù…Ù‚Ø§Ù„Ø§Øª -->
         <div class="carousel-item">
           <div class="icon-box bg-orange-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#FF9800" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
-          <span>مقالات</span>
+          <span>Ù…Ù‚Ø§Ù„Ø§Øª</span>
         </div>
-        <!-- عروض تقديمية -->
+        <!-- Ø¹Ø±ÙˆØ¶ ØªÙ‚Ø¯ÙŠÙ…ÙŠØ© -->
         <div class="carousel-item">
           <div class="icon-box bg-green-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><polyline points="10 9 12 7 14 9"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
           </div>
-          <span>عروض تقديمية</span>
+          <span>Ø¹Ø±ÙˆØ¶ ØªÙ‚Ø¯ÙŠÙ…ÙŠØ©</span>
         </div>
-        <!-- أوراق عمل -->
+        <!-- Ø£ÙˆØ±Ø§Ù‚ Ø¹Ù…Ù„ -->
         <div class="carousel-item">
           <div class="icon-box bg-purple-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#9C27B0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
-          <span>أوراق عمل</span>
+          <span>Ø£ÙˆØ±Ø§Ù‚ Ø¹Ù…Ù„</span>
         </div>
-        <!-- إنفوجرافيك -->
+        <!-- Ø¥Ù†ÙÙˆØ¬Ø±Ø§ÙÙŠÙƒ -->
         <div class="carousel-item">
           <div class="icon-box bg-pink-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#E91E63" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
-          <span>إنفوجرافيك</span>
+          <span>Ø¥Ù†ÙÙˆØ¬Ø±Ø§ÙÙŠÙƒ</span>
         </div>
-        <!-- نماذج ثلاثية الأبعاد -->
+        <!-- Ù†Ù…Ø§Ø°Ø¬ Ø«Ù„Ø§Ø«ÙŠØ© Ø§Ù„Ø£Ø¨Ø¹Ø§Ø¯ -->
         <div class="carousel-item">
           <div class="icon-box bg-teal-light">
             <svg viewBox="0 0 24 24" fill="none" stroke="#009688" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
-          <span>نماذج ثلاثية الأبعاد</span>
+          <span>Ù†Ù…Ø§Ø°Ø¬ Ø«Ù„Ø§Ø«ÙŠØ© Ø§Ù„Ø£Ø¨Ø¹Ø§Ø¯</span>
         </div>
       </div>
       <button class="carousel-arrow right" onclick="document.querySelector('.carousel').scrollBy({left: 200, behavior:'smooth'})">
@@ -843,17 +835,17 @@
     <!-- BREADCRUMB -->
     <div class="breadcrumb-bar">
       <div class="breadcrumb">
-        <span>السعودية</span>
-        <span class="sep">‹</span>
-        <span>التعليم العام</span>
-        <span class="sep">‹</span>
-        <span>الصف الأول المتوسط</span>
+        <span>Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ©</span>
+        <span class="sep">â€¹</span>
+        <span>Ø§Ù„ØªØ¹Ù„ÙŠÙ… Ø§Ù„Ø¹Ø§Ù…</span>
+        <span class="sep">â€¹</span>
+        <span>Ø§Ù„ØµÙ Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·</span>
         <span class="sep">/</span>
-        <span>الرياضيات</span>
+        <span>Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª</span>
         <span class="sep">/</span>
-        <span>الفصل الدراسي الأول</span>
+        <span>Ø§Ù„ÙØµÙ„ Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠ Ø§Ù„Ø£ÙˆÙ„</span>
       </div>
-      <div class="results-count">306 نتيجة</div>
+      <div class="results-count">306 Ù†ØªÙŠØ¬Ø©</div>
     </div>
 
     <!-- CARDS -->
@@ -861,129 +853,129 @@
 
     <!-- PAGINATION -->
     <div class="pagination" dir="ltr">
-      <button class="page-btn">«</button>
-      <button class="page-btn">‹</button>
+      <button class="page-btn">Â«</button>
+      <button class="page-btn">â€¹</button>
       <button class="page-btn active">1</button>
       <button class="page-btn">2</button>
       <button class="page-btn">3</button>
       <span class="page-dots">...</span>
       <button class="page-btn">33</button>
       <button class="page-btn">34</button>
-      <button class="page-btn">›</button>
-      <button class="page-btn">»</button>
+      <button class="page-btn">â€º</button>
+      <button class="page-btn">Â»</button>
     </div>
   </div>
 
 </div>
 
-<!-- PAGE 2: خطط دروس -->
+<!-- PAGE 2: Ø®Ø·Ø· Ø¯Ø±ÙˆØ³ -->
 <div class="lesson-plans-page tab-page" id="tabPlans">
 
-  <!-- Accordion 1: العلم وعملياته (OPEN) -->
+  <!-- Accordion 1: Ø§Ù„Ø¹Ù„Ù… ÙˆØ¹Ù…Ù„ÙŠØ§ØªÙ‡ (OPEN) -->
   <div class="accordion-item open">
     <div class="accordion-header" onclick="toggleAccordion(this)">
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">العلم وعملياته</div>
+      <div class="accordion-title">Ø§Ù„Ø¹Ù„Ù… ÙˆØ¹Ù…Ù„ÙŠØ§ØªÙ‡</div>
     </div>
     <div class="accordion-body">
       <div class="accordion-content">
         <ul class="lesson-list">
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            ماهية العلوم والاسئلة التي لاتجيب عنها
+            Ù…Ø§Ù‡ÙŠØ© Ø§Ù„Ø¹Ù„ÙˆÙ… ÙˆØ§Ù„Ø§Ø³Ø¦Ù„Ø© Ø§Ù„ØªÙŠ Ù„Ø§ØªØ¬ÙŠØ¨ Ø¹Ù†Ù‡Ø§
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            الفروع الثلاثة للعلوم
+            Ø§Ù„ÙØ±ÙˆØ¹ Ø§Ù„Ø«Ù„Ø§Ø«Ø© Ù„Ù„Ø¹Ù„ÙˆÙ…
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            المهارات التي يستخدمها العلماء
+            Ø§Ù„Ù…Ù‡Ø§Ø±Ø§Øª Ø§Ù„ØªÙŠ ÙŠØ³ØªØ®Ø¯Ù…Ù‡Ø§ Ø§Ù„Ø¹Ù„Ù…Ø§Ø¡
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            المقصود بالفرضية
+            Ø§Ù„Ù…Ù‚ØµÙˆØ¯ Ø¨Ø§Ù„ÙØ±Ø¶ÙŠØ©
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            الاختلاف بين الملاحظة والاستنتاج
+            Ø§Ù„Ø§Ø®ØªÙ„Ø§Ù Ø¨ÙŠÙ† Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø© ÙˆØ§Ù„Ø§Ø³ØªÙ†ØªØ§Ø¬
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-            الأسلوب العلمي
+            Ø§Ù„Ø£Ø³Ù„ÙˆØ¨ Ø§Ù„Ø¹Ù„Ù…ÙŠ
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            شرح أهداف تعلم الدرس
+            Ø´Ø±Ø­ Ø£Ù‡Ø¯Ø§Ù ØªØ¹Ù„Ù… Ø§Ù„Ø¯Ø±Ø³
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            المقارنة بين النظريات والقوانين
+            Ø§Ù„Ù…Ù‚Ø§Ø±Ù†Ø© Ø¨ÙŠÙ† Ø§Ù„Ù†Ø¸Ø±ÙŠØ§Øª ÙˆØ§Ù„Ù‚ÙˆØ§Ù†ÙŠÙ†
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            العلم وعملياته
+            Ø§Ù„Ø¹Ù„Ù… ÙˆØ¹Ù…Ù„ÙŠØ§ØªÙ‡
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            المنهج العلمي
+            Ø§Ù„Ù…Ù†Ù‡Ø¬ Ø§Ù„Ø¹Ù„Ù…ÙŠ
           </li>
         </ul>
         <div class="accordion-actions">
           <button class="btn-copy-embed">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            نسخ كود التضمين
+            Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†
           </button>
-          <button class="btn-view-plan">عرض الخطة</button>
+          <button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Accordion 2: النماذج العلمية (OPEN) -->
+  <!-- Accordion 2: Ø§Ù„Ù†Ù…Ø§Ø°Ø¬ Ø§Ù„Ø¹Ù„Ù…ÙŠØ© (OPEN) -->
   <div class="accordion-item open">
     <div class="accordion-header" onclick="toggleAccordion(this)">
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">النماذج العلمية</div>
+      <div class="accordion-title">Ø§Ù„Ù†Ù…Ø§Ø°Ø¬ Ø§Ù„Ø¹Ù„Ù…ÙŠØ©</div>
     </div>
     <div class="accordion-body">
       <div class="accordion-content">
         <ul class="lesson-list">
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            أنواع النماذج العلمية
+            Ø£Ù†ÙˆØ§Ø¹ Ø§Ù„Ù†Ù…Ø§Ø°Ø¬ Ø§Ù„Ø¹Ù„Ù…ÙŠØ©
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            تغير النماذج بتطور المعرفة
+            ØªØºÙŠØ± Ø§Ù„Ù†Ù…Ø§Ø°Ø¬ Ø¨ØªØ·ÙˆØ± Ø§Ù„Ù…Ø¹Ø±ÙØ©
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-            الاستقصاء العلمي
+            Ø§Ù„Ø§Ø³ØªÙ‚ØµØ§Ø¡ Ø§Ù„Ø¹Ù„Ù…ÙŠ
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-            الفرضية العلمية
+            Ø§Ù„ÙØ±Ø¶ÙŠØ© Ø§Ù„Ø¹Ù„Ù…ÙŠØ©
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-            شرح أهداف تعلم الدرس
+            Ø´Ø±Ø­ Ø£Ù‡Ø¯Ø§Ù ØªØ¹Ù„Ù… Ø§Ù„Ø¯Ø±Ø³
           </li>
           <li>
             <span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>
-            النماذج العلمية
+            Ø§Ù„Ù†Ù…Ø§Ø°Ø¬ Ø§Ù„Ø¹Ù„Ù…ÙŠØ©
           </li>
         </ul>
         <div class="accordion-actions">
           <button class="btn-copy-embed">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            نسخ كود التضمين
+            Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†
           </button>
-          <button class="btn-view-plan">عرض الخطة</button>
+          <button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button>
         </div>
       </div>
     </div>
@@ -995,11 +987,11 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">تقويم التفسيرات العلمية</div>
+      <div class="accordion-title">ØªÙ‚ÙˆÙŠÙ… Ø§Ù„ØªÙØ³ÙŠØ±Ø§Øª Ø§Ù„Ø¹Ù„Ù…ÙŠØ©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>تقويم التفسيرات العلمية</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>ØªÙ‚ÙˆÙŠÙ… Ø§Ù„ØªÙØ³ÙŠØ±Ø§Øª Ø§Ù„Ø¹Ù„Ù…ÙŠØ©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <div class="accordion-item">
@@ -1007,11 +999,11 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">الحركة</div>
+      <div class="accordion-title">Ø§Ù„Ø­Ø±ÙƒØ©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الحركة</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Ø§Ù„Ø­Ø±ÙƒØ©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <div class="accordion-item">
@@ -1019,11 +1011,11 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">قوانين نيوتن للحركة</div>
+      <div class="accordion-title">Ù‚ÙˆØ§Ù†ÙŠÙ† Ù†ÙŠÙˆØªÙ† Ù„Ù„Ø­Ø±ÙƒØ©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>قوانين نيوتن للحركة</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Ù‚ÙˆØ§Ù†ÙŠÙ† Ù†ÙŠÙˆØªÙ† Ù„Ù„Ø­Ø±ÙƒØ©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <div class="accordion-item">
@@ -1031,11 +1023,11 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">الشغل والآلات البسيطة</div>
+      <div class="accordion-title">Ø§Ù„Ø´ØºÙ„ ÙˆØ§Ù„Ø¢Ù„Ø§Øª Ø§Ù„Ø¨Ø³ÙŠØ·Ø©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الشغل والآلات البسيطة</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Ø§Ù„Ø´ØºÙ„ ÙˆØ§Ù„Ø¢Ù„Ø§Øª Ø§Ù„Ø¨Ø³ÙŠØ·Ø©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <div class="accordion-item">
@@ -1043,11 +1035,11 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">الخواص والتغيرات الفيزيائية</div>
+      <div class="accordion-title">Ø§Ù„Ø®ÙˆØ§Øµ ÙˆØ§Ù„ØªØºÙŠØ±Ø§Øª Ø§Ù„ÙÙŠØ²ÙŠØ§Ø¦ÙŠØ©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الخواص والتغيرات الفيزيائية</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Ø§Ù„Ø®ÙˆØ§Øµ ÙˆØ§Ù„ØªØºÙŠØ±Ø§Øª Ø§Ù„ÙÙŠØ²ÙŠØ§Ø¦ÙŠØ©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <div class="accordion-item">
@@ -1055,19 +1047,19 @@
       <div class="accordion-arrow">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="accordion-title">الخواص والتغيرات الكيميائية</div>
+      <div class="accordion-title">Ø§Ù„Ø®ÙˆØ§Øµ ÙˆØ§Ù„ØªØºÙŠØ±Ø§Øª Ø§Ù„ÙƒÙŠÙ…ÙŠØ§Ø¦ÙŠØ©</div>
     </div>
     <div class="accordion-body"><div class="accordion-content"><ul class="lesson-list">
-      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>الخواص والتغيرات الكيميائية</li>
-    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>نسخ كود التضمين</button><button class="btn-view-plan">عرض الخطة</button></div></div></div>
+      <li><span class="lesson-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2196F3" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Ø§Ù„Ø®ÙˆØ§Øµ ÙˆØ§Ù„ØªØºÙŠØ±Ø§Øª Ø§Ù„ÙƒÙŠÙ…ÙŠØ§Ø¦ÙŠØ©</li>
+    </ul><div class="accordion-actions"><button class="btn-copy-embed"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Ù†Ø³Ø® ÙƒÙˆØ¯ Ø§Ù„ØªØ¶Ù…ÙŠÙ†</button><button class="btn-view-plan">Ø¹Ø±Ø¶ Ø§Ù„Ø®Ø·Ø©</button></div></div></div>
   </div>
 
   <!-- Plans Pagination -->
   <div class="plans-pagination" dir="ltr">
-    <button class="page-btn">‹</button>
+    <button class="page-btn">â€¹</button>
     <button class="page-btn active">1</button>
     <button class="page-btn">2</button>
-    <button class="page-btn">›</button>
+    <button class="page-btn">â€º</button>
   </div>
 </div>
 
@@ -1075,73 +1067,73 @@
   // Card data
   const cards = [
     {
-      title: 'حل التناسبات (الصف الأول المتوسط)',
-      type: 'شرح خارجي',
+      title: 'Ø­Ù„ Ø§Ù„ØªÙ†Ø§Ø³Ø¨Ø§Øª (Ø§Ù„ØµÙ Ø§Ù„Ø£ÙˆÙ„ Ø§Ù„Ù…ØªÙˆØ³Ø·)',
+      type: 'Ø´Ø±Ø­ Ø®Ø§Ø±Ø¬ÙŠ',
       typeSub: 'External Learning Resources',
-      meta1: 'فيديو تعليمي', meta2: '8:45',
+      meta1: 'ÙÙŠØ¯ÙŠÙˆ ØªØ¹Ù„ÙŠÙ…ÙŠ', meta2: '8:45',
       bg: '#E3F2FD', accent: '#2196F3',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
       badgeBg: '#2196F3'
     },
     {
-      title: 'أوراق عمل: التناسب والتطبيقات',
-      type: 'أوراق عمل',
+      title: 'Ø£ÙˆØ±Ø§Ù‚ Ø¹Ù…Ù„: Ø§Ù„ØªÙ†Ø§Ø³Ø¨ ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚Ø§Øª',
+      type: 'Ø£ÙˆØ±Ø§Ù‚ Ø¹Ù…Ù„',
       typeSub: 'Worksheets',
-      meta1: 'ملف PDF', meta2: '2.4 م.ب',
+      meta1: 'Ù…Ù„Ù PDF', meta2: '2.4 Ù….Ø¨',
       bg: '#F3E5F5', accent: '#9C27B0',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>`,
       badgeBg: '#9C27B0'
     },
     {
-      title: 'صور توضيحية: التناسب في الحياة اليومية',
-      type: 'صور تعليمية',
+      title: 'ØµÙˆØ± ØªÙˆØ¶ÙŠØ­ÙŠØ©: Ø§Ù„ØªÙ†Ø§Ø³Ø¨ ÙÙŠ Ø§Ù„Ø­ÙŠØ§Ø© Ø§Ù„ÙŠÙˆÙ…ÙŠØ©',
+      type: 'ØµÙˆØ± ØªØ¹Ù„ÙŠÙ…ÙŠØ©',
       typeSub: 'Educational Images',
-      meta1: 'مجموعة صور', meta2: '12 صورة',
+      meta1: 'Ù…Ø¬Ù…ÙˆØ¹Ø© ØµÙˆØ±', meta2: '12 ØµÙˆØ±Ø©',
       bg: '#E8F5E9', accent: '#4CAF50',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
       badgeBg: '#4CAF50'
     },
     {
-      title: 'عرض تقديمي: مفهوم التناسب',
-      type: 'عرض تقديمي',
+      title: 'Ø¹Ø±Ø¶ ØªÙ‚Ø¯ÙŠÙ…ÙŠ: Ù…ÙÙ‡ÙˆÙ… Ø§Ù„ØªÙ†Ø§Ø³Ø¨',
+      type: 'Ø¹Ø±Ø¶ ØªÙ‚Ø¯ÙŠÙ…ÙŠ',
       typeSub: 'Presentation',
-      meta1: 'شرائح', meta2: '15 شريحة',
+      meta1: 'Ø´Ø±Ø§Ø¦Ø­', meta2: '15 Ø´Ø±ÙŠØ­Ø©',
       bg: '#FFF3E0', accent: '#FF9800',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>`,
       badgeBg: '#FF9800'
     },
     {
-      title: 'بطاقات تعليمية: مصطلحات التناسب',
-      type: 'بطاقات تعليمية',
+      title: 'Ø¨Ø·Ø§Ù‚Ø§Øª ØªØ¹Ù„ÙŠÙ…ÙŠØ©: Ù…ØµØ·Ù„Ø­Ø§Øª Ø§Ù„ØªÙ†Ø§Ø³Ø¨',
+      type: 'Ø¨Ø·Ø§Ù‚Ø§Øª ØªØ¹Ù„ÙŠÙ…ÙŠØ©',
       typeSub: 'Flashcards',
-      meta1: 'مجموعة بطاقات', meta2: '20 بطاقة',
+      meta1: 'Ù…Ø¬Ù…ÙˆØ¹Ø© Ø¨Ø·Ø§Ù‚Ø§Øª', meta2: '20 Ø¨Ø·Ø§Ù‚Ø©',
       bg: '#FFFDE7', accent: '#FFC107',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M12 8v4l3 2"/></svg>`,
       badgeBg: '#F9A825'
     },
     {
-      title: 'أسئلة تدريبية على التناسب',
-      type: 'أسئلة تدريبية',
+      title: 'Ø£Ø³Ø¦Ù„Ø© ØªØ¯Ø±ÙŠØ¨ÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„ØªÙ†Ø§Ø³Ø¨',
+      type: 'Ø£Ø³Ø¦Ù„Ø© ØªØ¯Ø±ÙŠØ¨ÙŠØ©',
       typeSub: 'Practice Questions',
-      meta1: '20 سؤال', meta2: 'مع الحلول',
+      meta1: '20 Ø³Ø¤Ø§Ù„', meta2: 'Ù…Ø¹ Ø§Ù„Ø­Ù„ÙˆÙ„',
       bg: '#E0F2F1', accent: '#009688',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
       badgeBg: '#009688'
     },
     {
-      title: 'اختبار قصير: التناسب',
-      type: 'اختبار قصير',
+      title: 'Ø§Ø®ØªØ¨Ø§Ø± Ù‚ØµÙŠØ±: Ø§Ù„ØªÙ†Ø§Ø³Ø¨',
+      type: 'Ø§Ø®ØªØ¨Ø§Ø± Ù‚ØµÙŠØ±',
       typeSub: 'Quick Quiz',
-      meta1: '10 أسئلة', meta2: 'مع الحلول',
+      meta1: '10 Ø£Ø³Ø¦Ù„Ø©', meta2: 'Ù…Ø¹ Ø§Ù„Ø­Ù„ÙˆÙ„',
       bg: '#E3F2FD', accent: '#2196F3',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
       badgeBg: '#2196F3'
     },
     {
-      title: 'مقال: أهمية التناسب في الرياضيات',
-      type: 'مقال تعليمي',
+      title: 'Ù…Ù‚Ø§Ù„: Ø£Ù‡Ù…ÙŠØ© Ø§Ù„ØªÙ†Ø§Ø³Ø¨ ÙÙŠ Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª',
+      type: 'Ù…Ù‚Ø§Ù„ ØªØ¹Ù„ÙŠÙ…ÙŠ',
       typeSub: 'Educational Article',
-      meta1: 'مقال', meta2: '5 دقائق قراءة',
+      meta1: 'Ù…Ù‚Ø§Ù„', meta2: '5 Ø¯Ù‚Ø§Ø¦Ù‚ Ù‚Ø±Ø§Ø¡Ø©',
       bg: '#FFF3E0', accent: '#FF9800',
       badgeIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
       badgeBg: '#FF9800'
@@ -1197,7 +1189,7 @@
           <button class="btn-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           </button>
-          <button class="btn-details">تفاصيل</button>
+          <button class="btn-details">ØªÙØ§ØµÙŠÙ„</button>
         </div>
       </div>
     </div>`;
