@@ -208,6 +208,14 @@
       font-weight: 700;
     }
     .result-body { padding: 14px; }
+    .curriculum-inline {
+      width: 100%;
+      min-height: 1120px;
+      border: 0;
+      border-radius: 16px;
+      background: #f5f7fa;
+      box-shadow: var(--shadow-md);
+    }
 
     .browse { padding: 50px 0 80px; }
     .browse-grid {
@@ -373,26 +381,10 @@
             </div>
           )}
 
-          {showResults && hasFilters && (
+          {showResults && (
             <section className="results">
               <div className="container">
-                <h2 className="display">{query ? `«${query}»` : "نتائج البحث"}</h2>
-                <div className="meta-filters">
-                  <span className="chip">السعودية</span>
-                  <span className="chip">الوزارة</span>
-                  <span className="chip">الأول المتوسط</span>
-                </div>
-                <div className="result-grid">
-                  {RESULTS.map((r,idx) => (
-                    <article key={idx} className="card">
-                      <div className="result-top" style={{background:r.d}}>📘</div>
-                      <div className="result-body">
-                        <div className="display" style={{fontWeight:700,fontSize:16}}>{r.t}</div>
-                        <div style={{fontSize:12,color:"var(--muted)",marginTop:6}}>{r.s} · {r.g} · {r.c}</div>
-                      </div>
-                    </article>
-                  ))}
-                </div>
+                <iframe className="curriculum-inline" src="curriculum.html" title="نتائج المنهج"></iframe>
               </div>
             </section>
           )}
