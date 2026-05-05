@@ -45,68 +45,6 @@
     direction: rtl;
     min-height: 100vh;
   }
-
-  /* ===== HEADER ===== */
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(248,251,255,.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid #d8e6f5;
-  }
-  .header-inner {
-    max-width: 1280px;
-    margin: 0 auto;
-    height: 72px;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .brand-logo {
-    height: 40px;
-    width: auto;
-    display: block;
-  }
-  .user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    direction: ltr;
-  }
-  .back-link {
-    height: 38px;
-    padding: 0 14px;
-    border-radius: 999px;
-    border: 1px solid #d8e6f5;
-    background: #fff;
-    color: #1f4d8d;
-    font-family: "Cairo", sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .back-link:hover { background: #f4f8ff; }
-  .user-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #3A7BD5, #3A9D5D);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 14px;
-  }
-  .user-info { text-align: right; }
-  .user-name { font-size: 14px; font-weight: 700; color: #24364B; }
-  .user-label { font-size: 11px; color: #6B7C8F; }
-
   /* ===== TABS ===== */
   .tabs-container {
     display: flex;
@@ -727,30 +665,12 @@
   }
   @media (max-width: 500px) {
     .cards-grid { grid-template-columns: 1fr; }
-    .header { padding: 12px 16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <img class="brand-logo" src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary">
-    <div class="user-profile">
-      <button class="back-link" onclick="goBackToSearch()">
-        <span>&larr;</span>
-        <span>العودة للبحث</span>
-      </button>
-      <div class="user-avatar">ME</div>
-      <div class="user-info">
-        <div class="user-name">Moamen Elewa</div>
-        <div class="user-label">حسابي</div>
-      </div>
-    </div>
-  </div>
-</header>
-
+<!-- HEADER -->`r`n
 <!-- TABS -->
 <div class="tabs-container">
   <div class="tabs">
@@ -1243,15 +1163,6 @@
       <line x1="200" y1="30" x2="220" y2="10" stroke="${accent}" stroke-width="1.5" opacity="0.15"/>
       <line x1="50" y1="80" x2="30" y2="60" stroke="${accent}" stroke-width="1.5" opacity="0.15"/>
     </svg>`;
-  }
-
-    function goBackToSearch() {
-    const ref = document.referrer || "";
-    if (window.history.length > 1 && ref) {
-      window.history.back();
-      return;
-    }
-    window.location.href = "search.html";
   }
 // Render cards
   const grid = document.getElementById('cardsGrid');
