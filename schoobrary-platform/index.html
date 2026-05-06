@@ -29,7 +29,7 @@
       font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
     }
     button, input, select { font: inherit; }
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1800px; margin: 0 auto; padding: 0 28px; }
 
     .app-header {
       position: sticky;
@@ -64,50 +64,52 @@
       min-height: calc(100vh - 72px);
       background: radial-gradient(circle at 86% 18%, rgba(84,181,63,.16), transparent 34%), linear-gradient(135deg, #0d3b7a, #3a7bd5, #3a9d5d);
       color: #fff;
-      padding: 78px 0 98px;
+      padding: 0;
       overflow: hidden;
+      display: flex;
+      align-items: center;
     }
     .hero h1 {
       margin: 0;
       text-align: center;
-      font-size: clamp(34px, 6vw, 68px);
+      font-size: clamp(44px, 7vw, 92px);
       line-height: 1.1;
       font-weight: 800;
     }
     .hero p {
-      max-width: 720px;
+      max-width: 980px;
       margin: 16px auto 0;
       text-align: center;
       color: rgba(255,255,255,.86);
-      font-size: 17px;
+      font-size: 22px;
       line-height: 1.8;
     }
-    .search-shell { max-width: 900px; margin: 34px auto 0; }
+    .search-shell { width: min(84vw, 1680px); margin: 42px auto 0; }
     .search-bar {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 7px;
+      padding: 10px;
       border-radius: 999px;
       background: #fff;
       box-shadow: 0 30px 80px rgba(13,34,64,.35);
     }
     .search-input {
       flex: 1;
-      height: 50px;
+      height: 64px;
       border: 0;
       outline: 0;
       background: transparent;
       color: var(--ink);
       text-align: right;
-      font-size: 15px;
+      font-size: 20px;
       padding: 0 14px;
     }
     .btn {
       border: 0;
       border-radius: 999px;
-      min-height: 44px;
-      padding: 0 20px;
+      min-height: 56px;
+      padding: 0 28px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -124,21 +126,21 @@
       border: 1px solid var(--border);
     }
     .filter-triggers {
-      margin-top: 18px;
+      margin-top: 24px;
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
       justify-content: center;
     }
     .filter-trigger {
-      min-width: 136px;
-      min-height: 56px;
-      padding: 0 28px;
+      min-width: 220px;
+      min-height: 64px;
+      padding: 0 40px;
       border-radius: 999px;
       border: 1.5px solid rgba(255,255,255,.34);
       background: rgba(255,255,255,.10);
       color: #fff;
-      font-size: 18px;
+      font-size: 24px;
       font-weight: 800;
       text-align: center;
       cursor: pointer;
@@ -147,17 +149,18 @@
     .filter-trigger.active { background: var(--orange); border-color: var(--orange); }
 
     .drawer-wrap {
-      max-width: 1160px;
-      margin: -56px auto 0;
-      padding: 0 24px;
+      width: 100%;
+      max-width: min(84vw, 1680px);
+      margin: 18px auto 0;
+      padding: 0;
       position: relative;
       z-index: 10;
     }
     .drawer-card {
       background: #fff;
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 22px;
+      border-radius: 24px;
+      padding: 28px;
       box-shadow: var(--shadow);
     }
     .drawer-head {
@@ -170,23 +173,23 @@
     .drawer-title {
       margin: 0;
       color: var(--ink);
-      font-size: clamp(24px, 4vw, 42px);
+      font-size: clamp(30px, 4.8vw, 56px);
       font-weight: 800;
     }
     .drawer-sub {
       margin: 8px 0 0;
       color: var(--muted);
-      font-size: clamp(14px, 2vw, 20px);
+      font-size: clamp(18px, 2.4vw, 28px);
     }
-    .field-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .field-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
     .field { display: flex; flex-direction: column; gap: 6px; }
     .field label {
       color: var(--muted);
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 700;
     }
     .field select {
-      height: 44px;
+      height: 56px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: #fff;
@@ -211,7 +214,11 @@
     }
     @media (max-width: 900px) {
       .container { padding: 0 16px; }
-      .hero { padding: 64px 0 82px; }
+      .hero { padding: 24px 0; }
+      .hero p { font-size: 16px; }
+      .search-shell { width: min(100%, 980px); margin-top: 24px; }
+      .filter-trigger { min-width: 180px; min-height: 54px; font-size: 20px; }
+      .drawer-wrap { max-width: 100%; }
     }
     @media (max-width: 600px) {
       .header-row { height: 64px; }
@@ -232,13 +239,15 @@
       .search-bar .btn-primary {
         order: 2;
         align-self: stretch;
-        min-height: 42px;
+        min-height: 44px;
         padding-inline: 16px;
         font-size: 14px;
       }
       .filter-trigger {
         width: 100%;
         min-height: 52px;
+        min-width: 0;
+        font-size: 18px;
       }
       .field-grid { grid-template-columns: 1fr; }
       .drawer-card { padding: 16px; }
@@ -268,7 +277,7 @@
       );
     }
 
-    function SearchHero({ query, setQuery, activeDrawer, setActiveDrawer, onGeneralSearch }) {
+    function SearchHero({ query, setQuery, activeDrawer, setActiveDrawer, onGeneralSearch, onDrawerApply }) {
       return (
         <section className="hero">
           <div className="container">
@@ -284,6 +293,7 @@
                 <button className={`filter-trigger ${activeDrawer === "curriculum" ? "active" : ""}`} onClick={() => setActiveDrawer(activeDrawer === "curriculum" ? null : "curriculum")}>بحث بالمنهج</button>
               </div>
             </div>
+            {activeDrawer && <SearchFilters type={activeDrawer} onApply={onDrawerApply} onClose={() => setActiveDrawer(null)} />}
           </div>
         </section>
       );
@@ -344,8 +354,7 @@
       return (
         <>
           <AppHeader />
-          <SearchHero query={query} setQuery={setQuery} activeDrawer={activeDrawer} setActiveDrawer={setActiveDrawer} onGeneralSearch={runGeneralSearch} />
-          {activeDrawer && <SearchFilters type={activeDrawer} onApply={runDrawerSearch} onClose={() => setActiveDrawer(null)} />}
+          <SearchHero query={query} setQuery={setQuery} activeDrawer={activeDrawer} setActiveDrawer={setActiveDrawer} onGeneralSearch={runGeneralSearch} onDrawerApply={runDrawerSearch} />
         </>
       );
     }
