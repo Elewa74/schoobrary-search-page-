@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Schoobrary Platform</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #24364b;
+      --muted: #6b7c8f;
+      --bone: #f8fbff;
+      --blue: #2196f3;
+      --blue-2: #3a7bd5;
+      --green: #3a9d5d;
+      --orange: #f26a2e;
+      --border: #d8e6f5;
+      --shadow: 0 14px 38px rgba(36,54,75,.12);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bone);
+      color: var(--ink);
+      font-family: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif;
+    }
+    button, input, select { font: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(248,251,255,.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .header-row {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .logo { height: 40px; width: auto; }
+    .user-box { display: flex; align-items: center; gap: 10px; }
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue-2), var(--green));
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      background: radial-gradient(circle at 86% 18%, rgba(84,181,63,.16), transparent 34%), linear-gradient(135deg, #0d3b7a, #3a7bd5, #3a9d5d);
+      color: #fff;
+      padding: 78px 0 98px;
+      overflow: hidden;
+    }
+    .hero h1 {
+      margin: 0;
+      text-align: center;
+      font-size: clamp(34px, 6vw, 68px);
+      line-height: 1.1;
+      font-weight: 800;
+    }
+    .hero p {
+      max-width: 720px;
+      margin: 16px auto 0;
+      text-align: center;
+      color: rgba(255,255,255,.86);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .search-shell { max-width: 900px; margin: 34px auto 0; }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px;
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 30px 80px rgba(13,34,64,.35);
+    }
+    .search-input {
+      flex: 1;
+      height: 50px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+      text-align: right;
+      font-size: 15px;
+      padding: 0 14px;
+    }
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      min-height: 44px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-orange { background: var(--orange); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: var(--blue);
+      border: 1px solid var(--border);
+    }
+    .filter-triggers {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+    .filter-trigger {
+      min-width: 136px;
+      min-height: 56px;
+      padding: 0 28px;
+      border-radius: 999px;
+      border: 1.5px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.10);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      text-align: center;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+    .filter-trigger.active { background: var(--orange); border-color: var(--orange); }
+
+    .drawer-wrap {
+      max-width: 1160px;
+      margin: -56px auto 0;
+      padding: 0 24px;
+      position: relative;
+      z-index: 10;
+    }
+    .drawer-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .drawer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .drawer-title {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(24px, 4vw, 42px);
+      font-weight: 800;
+    }
+    .drawer-sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: clamp(14px, 2vw, 20px);
+    }
+    .field-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .field select {
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--ink);
+      padding: 0 12px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236b7c8f' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+    }
+    .drawer-actions {
+      display: flex;
+      justify-content: flex-start;
+      gap: 12px;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 1100px) {
+      .field-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 900px) {
+      .container { padding: 0 16px; }
+      .hero { padding: 64px 0 82px; }
+    }
+    @media (max-width: 600px) {
+      .header-row { height: 64px; }
+      .hero { min-height: calc(100vh - 64px); }
+      .hero h1 { font-size: clamp(28px, 9vw, 40px); }
+      .hero p { font-size: 14px; }
+      .search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 16px;
+        padding: 8px;
+      }
+      .search-input {
+        order: 1;
+        height: 44px;
+        padding-inline: 8px;
+      }
+      .search-bar .btn-primary {
+        order: 2;
+        align-self: stretch;
+        min-height: 42px;
+        padding-inline: 16px;
+        font-size: 14px;
+      }
+      .filter-trigger {
+        width: 100%;
+        min-height: 52px;
+      }
+      .field-grid { grid-template-columns: 1fr; }
+      .drawer-card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function AppHeader() {
+      return (
+        <header className="app-header">
+          <div className="container header-row">
+            <img className="logo" src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary" />
+            <div className="user-box">
+              <div className="avatar">ME</div>
+              <div>
+                <div style={{ fontWeight: 800, fontSize: 14 }}>Moamen Elewa</div>
+                <div style={{ fontSize: 11, color: "var(--muted)" }}>حسابي</div>
+              </div>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    function SearchHero({ query, setQuery, activeDrawer, setActiveDrawer, onGeneralSearch }) {
+      return (
+        <section className="hero">
+          <div className="container">
+            <h1>ابحث في سكوبراري</h1>
+            <p>اكتشف الكتب، الفيديوهات، الأسئلة، البطاقات، الصور، المقالات، وخطط الدروس من مكان واحد.</p>
+            <div className="search-shell">
+              <div className="search-bar">
+                <button className="btn btn-primary" onClick={onGeneralSearch}>بحث</button>
+                <input className="search-input" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="ابحث عن موضوع، مادة، درس، سؤال، كتاب أو نوع مورد..." />
+              </div>
+              <div className="filter-triggers">
+                <button className={`filter-trigger ${activeDrawer === "topic" ? "active" : ""}`} onClick={() => setActiveDrawer(activeDrawer === "topic" ? null : "topic")}>بحث بالموضوع</button>
+                <button className={`filter-trigger ${activeDrawer === "curriculum" ? "active" : ""}`} onClick={() => setActiveDrawer(activeDrawer === "curriculum" ? null : "curriculum")}>بحث بالمنهج</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function SearchFilters({ type, onApply, onClose }) {
+      const isTopic = type === "topic";
+      const fields = isTopic
+        ? [["الموضوع الرئيسي", "الجبر"], ["المجال", "اختر..."], ["المحور", "اختر..."], ["الموضوع الفرعي", "اختر..."]]
+        : [["الدولة", "السعودية"], ["المنهج", "وزارة التعليم"], ["الصف الدراسي", "الأول المتوسط"], ["المادة", "الرياضيات"]];
+      return (
+        <div className="drawer-wrap">
+          <div className="drawer-card">
+            <div className="drawer-head">
+              <div>
+                <h2 className="drawer-title">{isTopic ? "الموضوع أو المادة" : "الدولة / المنهج"}</h2>
+                <p className="drawer-sub">{isTopic ? "حدد المادة أو الموضوع للوصول إلى الموارد التعليمية المرتبطة به." : "اختر الدولة والمنهج والصف للوصول إلى موارد مرتبطة بالمقرر الدراسي."}</p>
+              </div>
+              <button className="btn btn-outline" onClick={onClose}>إغلاق</button>
+            </div>
+            <div className="field-grid">
+              {fields.map(([label, value]) => (
+                <div className="field" key={label}>
+                  <label>{label}</label>
+                  <select defaultValue={value}>
+                    <option>{value}</option>
+                  </select>
+                </div>
+              ))}
+            </div>
+            <div className="drawer-actions">
+              <button className="btn btn-orange" onClick={() => onApply(type)}>بحث</button>
+              <button className="btn btn-outline">إعادة تعيين</button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [query, setQuery] = React.useState("");
+      const [activeDrawer, setActiveDrawer] = React.useState(null);
+
+      function redirectTo(path, value) {
+        const q = encodeURIComponent(value || "");
+        window.location.href = `${path}?q=${q}`;
+      }
+
+      function runDrawerSearch(type) {
+        if (type === "topic") redirectTo("topic-material.html", query);
+        if (type === "curriculum") redirectTo("curriculum.html", query);
+      }
+
+      function runGeneralSearch() {
+        redirectTo("curriculum.html", query);
+      }
+
+      return (
+        <>
+          <AppHeader />
+          <SearchHero query={query} setQuery={setQuery} activeDrawer={activeDrawer} setActiveDrawer={setActiveDrawer} onGeneralSearch={runGeneralSearch} />
+          {activeDrawer && <SearchFilters type={activeDrawer} onApply={runDrawerSearch} onClose={() => setActiveDrawer(null)} />}
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
