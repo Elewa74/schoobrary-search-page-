@@ -48,6 +48,40 @@
     direction: rtl;
     min-height: 100vh;
   }
+  .sub-header {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: rgba(248,251,255,.94);
+    border-bottom: 1px solid #d8e6f5;
+    backdrop-filter: blur(10px);
+  }
+  .sub-header .row {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .back-home {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 999px;
+    border: 1px solid #d8e6f5;
+    background: #fff;
+    color: #1f5ca8;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .back-home:hover { background: #edf5ff; }
+  .sub-logo { height: 40px; width: auto; }
   /* ===== TABS ===== */
   .tabs-container {
     display: flex;
@@ -672,6 +706,12 @@
 </style>
 </head>
 <body>
+<header class="sub-header">
+  <div class="row">
+    <a class="back-home" href="index.html">العودة للرئيسية</a>
+    <img class="sub-logo" src="design-system/assets/logo-horizontal-schoobrary.png" alt="Schoobrary">
+  </div>
+</header>
 
 <!-- HEADER -->
 <!-- TABS -->
